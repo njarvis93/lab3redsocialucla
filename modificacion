@@ -1,0 +1,7 @@
+canal y posts(nose si entendi mal pero no seria de 1 a muchos? digo que 1 post solo puede estar en un canal no?
+igual lo deje manytomany x si soy yo la que estoy confu)
+relacion 1...0* (perfil usuario no entendi esa relacion lo deje onetoone)
+relacion de muchos a muchos de area con perfil
+usuario y canal muchos a muchos
+perfil_user lo quite de usuario y deje la relacion OneToOne en perfil, bueno eso ademas de otros atributos que fue donde quedamos que se quitarian
+
