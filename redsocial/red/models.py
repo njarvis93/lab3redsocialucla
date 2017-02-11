@@ -63,7 +63,7 @@ class Usuario(models.Model):
     telefono_oficina = models.CharField(max_length=20)
 
     def __str__(self):
-        return '%s' % self.nombres+' '+self.apellidos
+        return self.nombres+' '+self.apellidos
 
 class Seguidor(models.Model):
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -95,34 +95,49 @@ class Canal(models.Model):
     nombre = models.TextField(max_length=20)
     descripcion = models.TextField(max_length=100)
     fecha_creacion = models.DateTimeField()
-    autor = models.ForeignKey(Usuario, related_name='autor', on_delete=models.CASCADE, unique=True)
+    autor = models.ForeignKey(Usuario, related_name='creador', on_delete=models.CASCADE, unique=True)
     areas = models.ManyToManyField(AreaConocimiento, related_name='areas')
     miembros = models.ManyToManyField(Perfil)
 
 class Post(models.Model):
     tipo = models.IntegerField()
-    autor = models.ForeignKey(Usuario)
+    autor = models.ForeignKey(Usuario, related_name='user')
     contenido = models.TextField()
-    imagenes = models.ImageField(upload_to=user_directory_path_images)
-    audio = models.FileField(upload_to=user_directory_path_audio)
-    video = models.FileField(upload_to=user_directory_path_videos)
+    imagenes = models.ImageField(upload_to=user_directory_path_images, blank=True)
+    audio = models.FileField(upload_to=user_directory_path_audio, blank=True)
+    video = models.FileField(upload_to=user_directory_path_videos, blank=True)
     fecha_creacion = models.DateField()
     hora_creacion = models.TimeField()
-    id_canal = models.ManyToManyField(Canal, blank=True)
+    id_canal = models.ManyToManyField(Canal, related_name='posts', blank=True)
+    class Meta:
+        unique_together = ('autor', 'fecha_creacion', 'hora_creacion')
+        ordering = ['fecha_creacion', 'hora_creacion']
+
+
 
 class Actividad(models.Model):
-    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    autor_actividad = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    fecha_ocurrencia = models.DateField()
-    hora_ocurrencia = models.TimeField()
+    id_post = models.ForeignKey(Post, related_name='actividad', on_delete=models.CASCADE)
     tipo = models.IntegerField()
-
 
 class Comentario(models.Model):
     contenido = models.TextField()
+    autor = models.ForeignKey(Usuario, related_name='autor', on_delete=models.CASCADE)
     tipo = models.IntegerField()
+    fecha_ocurrencia = models.DateField()
     id_comentario_padre = models.ForeignKey('self', related_name='lista_respuesta', null=True)
+    id_actividad = models.ForeignKey(Actividad, related_name='comentarios', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.autor+' Content: '+self.contenido
+
+
+class Compartir(models.Model):
+    tipo = models.IntegerField()
+    visibilidad = models.IntegerField()
+    fecha_ocurrencia = models.DateField()
     id_actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE)
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
 
 class ExperienciaLaboral(models.Model):
     empresa = models.CharField(max_length=50)
@@ -132,7 +147,3 @@ class ExperienciaLaboral(models.Model):
     descripcion = models.TextField()
     id_autor = models.ForeignKey(Perfil, on_delete=models.CASCADE)
 
-class Compartir(models.Model):
-    tipo = models.IntegerField()
-    visibilidad = models.IntegerField()
-    id_actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE)

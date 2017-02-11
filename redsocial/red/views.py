@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from django.http import Http404
-from .models import Usuario, Canal
-from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer
+from .models import Usuario, Canal, Post, Actividad, Comentario
+from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer
 from django.shortcuts import render
 
 
@@ -51,7 +51,7 @@ class UsuarioDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def delete(self, request, pk, format = None):
         usuario = self.get_object(pk)
         usuario.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -64,5 +64,31 @@ class CanalList(generics.ListCreateAPIView):
 class CanalDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Canal.objects.all()
     serializer_class = CanalSerializer
+
+
+class ActividadesList(APIView):
+
+   def get(self, request, id_post, format = None):
+       actividad = Actividad.objects.filter(id_post=id_post)
+       serializer = ActividadSerializer(actividad, many=True)
+       return Response(serializer.data)
+
+
+class ComentariosList(APIView):
+
+    def get(self, request, id_actividad, format = None):
+        comentario = Comentario.objects.filter(id_actividad=id_actividad)
+        serializer = ComentarioSerializer(comentario, many=True)
+        return Response(serializer.data)
+
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
 
 
