@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from django.http import Http404
-from .models import Usuario, Canal, Post, Actividad, Comentario
-from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, RespuestasComentariosSerializer
+from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimiento
+from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer
 from django.shortcuts import render
 
 
@@ -89,8 +89,15 @@ class ActividadDetail(APIView):
 
 class ComentariosList(APIView):
 
-    def get(self, request, pk, id_actividad, format = None):
-        comentario = Comentario.objects.get(pk=pk, id_actividad=id_actividad)
+    def get_actividad(self, id_post, format=None):
+        try:
+            return Actividad.objects.get(id_post=id_post, tipo=1)
+        except Actividad.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_post, format = None):
+        actividad = self.get_actividad(id_post)
+        comentario = Comentario.objects.filter(id_actividad=actividad.pk)
         serializer = ComentarioSerializer(comentario, many=True)
         return Response(serializer.data)
 
@@ -113,12 +120,12 @@ class ComentarioDetail(APIView):
 
     def get(self, request, pk, format=None):
         comentario = self.get_object(pk)
-        serializer = UsuarioSerializer(comentario)
+        serializer = ComentarioSerializer(comentario)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         comentario = self.get_object(pk)
-        serializer = UsuarioSerializer(comentario, data=request.data)
+        serializer = ComentarioSerializer(comentario, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -137,6 +144,12 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+class AreaConocimientoList(generics.ListCreateAPIView):
+    queryset = AreaConocimiento.objects.all()
+    serializer_class = AreaConocimientoSerializer
 
+class AreaConocimientoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AreaConocimiento.objects.all()
+    serializer_class = AreaConocimientoSerializer
 
 

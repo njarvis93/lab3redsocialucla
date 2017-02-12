@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Usuario, AreaConocimiento, Canal, Actividad, Comentario, Compartir, Post
+from .models import Usuario, AreaConocimiento, Canal, Actividad, Comentario, Compartir, Post, Likes
 
 class UsuarioSerializer(ModelSerializer):
 
@@ -13,6 +13,20 @@ class AreaConocimientoSerializer(ModelSerializer):
         model = AreaConocimiento
         fields = ('nombre', 'descripcion')
 
+
+class CompartirSerializer(ModelSerializer):
+    autor = UsuarioSerializer(many=False)
+
+    class Meta:
+        model = Compartir
+        fields = ('id', 'tipo', 'visibilidad', 'fecha_ocurrencia', 'autor', 'id_actividad')
+
+class LikesSerializer(ModelSerializer):
+    autor = UsuarioSerializer(many=False)
+
+    class Meta:
+        model = Likes
+        fields = ('id', 'autor', 'fecha_ocurrencia', 'hora_ocurrencia', 'id_actividad')
 
 class RespuestasComentariosSerializer(ModelSerializer):
 
@@ -30,10 +44,12 @@ class ComentarioSerializer(ModelSerializer):
 
 class ActividadSerializer(ModelSerializer):
     comentarios = ComentarioSerializer(many=True, read_only=True)
+    shares = CompartirSerializer(many=True, read_only=True)
+    me_gustas = LikesSerializer(many=True, read_only=True)
 
     class Meta:
         model = Actividad
-        fields = ('id', 'id_post', 'tipo', 'comentarios')
+        fields = ('id', 'id_post', 'tipo', 'comentarios', 'shares', 'me_gustas')
         ordering = 'tipo'
 
 class PostSerializer(ModelSerializer):
