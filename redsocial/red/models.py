@@ -124,7 +124,7 @@ class Comentario(models.Model):
     autor = models.ForeignKey(Usuario, related_name='autor', on_delete=models.CASCADE)
     tipo = models.IntegerField()
     fecha_ocurrencia = models.DateField()
-    id_comentario_padre = models.ForeignKey('self', related_name='lista_respuesta', null=True)
+    id_comentario_padre = models.ForeignKey('self', related_name='respuestas', null=True)
     id_actividad = models.ForeignKey(Actividad, related_name='comentarios', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -135,7 +135,7 @@ class Compartir(models.Model):
     tipo = models.IntegerField()
     visibilidad = models.IntegerField()
     fecha_ocurrencia = models.DateField()
-    id_actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE)
+    id_actividad = models.ForeignKey(Actividad, related_name='shares', on_delete=models.CASCADE)
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
 
@@ -147,3 +147,8 @@ class ExperienciaLaboral(models.Model):
     descripcion = models.TextField()
     id_autor = models.ForeignKey(Perfil, on_delete=models.CASCADE)
 
+class Likes(models.Model):
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha_ocurrencia = models.DateField()
+    hora_ocurrencia = models.DateTimeField()
+    id_actividad = models.ForeignKey(Actividad, related_name='me_gustas', on_delete=models.CASCADE)

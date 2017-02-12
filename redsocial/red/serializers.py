@@ -14,12 +14,19 @@ class AreaConocimientoSerializer(ModelSerializer):
         fields = ('nombre', 'descripcion')
 
 
-class ComentarioSerializer(ModelSerializer):
-    autor = UsuarioSerializer(many=False)
+class RespuestasComentariosSerializer(ModelSerializer):
 
     class Meta:
         model = Comentario
-        fields = ('contenido', 'id_actividad', 'id_comentario_padre', 'fecha_ocurrencia', 'autor')
+        fields = ('id', 'contenido', 'id_actividad', 'id_comentario_padre', 'fecha_ocurrencia', 'autor')
+
+class ComentarioSerializer(ModelSerializer):
+    autor = UsuarioSerializer(many=False)
+    respuestas = RespuestasComentariosSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Comentario
+        fields = ('id','contenido', 'id_actividad', 'id_comentario_padre', 'fecha_ocurrencia', 'autor', 'respuestas')
 
 class ActividadSerializer(ModelSerializer):
     comentarios = ComentarioSerializer(many=True, read_only=True)
