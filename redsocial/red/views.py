@@ -34,7 +34,7 @@ class UsuarioDetail(APIView):
     """
     def get_object(self, pk):
         try:
-            return Usuario.objects.get(idioma=pk)
+            return Usuario.objects.get(pk=pk)
         except Usuario.DoesNotExist:
             raise Http404
 
@@ -157,7 +157,7 @@ class ExperienciaLaboralList(APIView):
 
     def get_user(self, id):
         try:
-            return Usuario.objects.get(idioma=id)
+            return Usuario.objects.get(pk=id)
         except Usuario.DoesNotExist:
             raise Http404
 
@@ -178,7 +178,7 @@ class ExperienciaLaboralDetail(APIView):
 
     def get_object(self, id, id_autor):
         try:
-            return ExperienciaLaboral.objects.get(idioma=id, id_autor=id_autor)
+            return ExperienciaLaboral.objects.get(pk=id, id_autor=id_autor)
         except ExperienciaLaboral.DoesNotExist:
             raise Http404
 

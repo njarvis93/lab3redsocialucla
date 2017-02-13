@@ -35,10 +35,15 @@ class InteresesSerializer(ModelSerializer):
         fields = ('id', 'descripcion')
 
 
+class UsuarioSerializer(ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = (
+        'username', 'email', 'nombres', 'apellidos', 'fecha_nacimiento', 'direccion', 'telefono_fijo', 'telefono_movil', 'telefono_oficina')
 
 
 class PerfilSerializer(ModelSerializer):
-    #owner = UsuarioSerializer(many=False, read_only=True)
+    username = UsuarioSerializer(many=False, read_only=True)
     areas = AreaConocimientoSerializer(many=True, read_only=True)
     idiomas = IdiomaSerializer(many=True, read_only=True)
     intereses = InteresesSerializer(many=True, read_only=True)
@@ -48,13 +53,6 @@ class PerfilSerializer(ModelSerializer):
     class Meta:
         model = Perfil
         fields = ('username', 'foto_perfil', 'url_facebook_perfil', 'url_twitter_perfil', 'areas', 'idiomas', 'intereses', 'formacion', 'experiencia')
-
-
-class UsuarioSerializer(ModelSerializer):
-    #perfil = PerfilSerializer(read_only=True)
-    class Meta:
-        model = Usuario
-        fields = ('username', 'email', 'nombres', 'apellidos', 'fecha_nacimiento', 'direccion', 'telefono_fijo', 'telefono_movil', 'telefono_oficina', 'perfil')
 
 
 class CompartirSerializer(ModelSerializer):
@@ -85,6 +83,7 @@ class ComentarioSerializer(ModelSerializer):
     class Meta:
         model = Comentario
         fields = ('id','contenido', 'id_actividad', 'id_comentario_padre', 'fecha_ocurrencia', 'autor', 'respuestas')
+        ordering = ('-fecha_ocurrencia',)
 
 class ActividadSerializer(ModelSerializer):
     comentarios = ComentarioSerializer(many=True, read_only=True)
@@ -102,6 +101,7 @@ class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'autor', 'contenido', 'fecha_creacion', 'hora_creacion', 'imagenes', 'audio', 'video', 'actividad')
+        ordering = ('-fecha_creacion',)
 
 class CanalSerializer(ModelSerializer):
     areas = AreaConocimientoSerializer(many=True, read_only=True)
@@ -111,3 +111,4 @@ class CanalSerializer(ModelSerializer):
     class Meta:
         model = Canal
         fields = ('nombre', 'descripcion', 'fecha_creacion', 'autor', 'areas', 'posts')
+
