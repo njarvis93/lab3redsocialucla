@@ -2,7 +2,8 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, ActividadesList, PostDetail, PostList,\
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
-    IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList
+    IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
+    NivelFormacionDetail
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()),
@@ -25,6 +26,8 @@ urlpatterns = [
     url(r'^user/profiles/', PerfilUserList.as_view()),
     url(r'^user/my_profile/(?P<pk>[a-z0-9]+)/$', PerfilUserDetail.as_view()),
     url(r'^todos/', UserList.as_view()),
+    url(r'^formacion/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionList.as_view()),
+    url(r'^formacion/(?P<pk>[0-9]+)/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -34,7 +34,7 @@ class UsuarioDetail(APIView):
     """
     def get_object(self, pk):
         try:
-            return Usuario.objects.get(idioma=pk)
+            return Usuario.objects.get(pk=pk)
         except Usuario.DoesNotExist:
             raise Http404
 
@@ -157,7 +157,7 @@ class ExperienciaLaboralList(APIView):
 
     def get_user(self, id):
         try:
-            return Usuario.objects.get(idioma=id)
+            return Usuario.objects.get(pk=id)
         except Usuario.DoesNotExist:
             raise Http404
 
@@ -178,7 +178,7 @@ class ExperienciaLaboralDetail(APIView):
 
     def get_object(self, id, id_autor):
         try:
-            return ExperienciaLaboral.objects.get(idioma=id, id_autor=id_autor)
+            return ExperienciaLaboral.objects.get(pk=id, id_autor=id_autor)
         except ExperienciaLaboral.DoesNotExist:
             raise Http404
 
@@ -228,7 +228,7 @@ class IdiomaPorUsuarioDetail(APIView):
         try:
             return Idioma.objects.get(perfil=perfil, id=idioma)
         except Idioma.DoesNotExist:
-            return Http404
+            raise Http404
 
     def get(self, request, perfil, idioma, format=None):
         idioma = self.get_object(perfil, idioma)
@@ -259,3 +259,42 @@ class PerfilUserDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+
+class NivelFormacionList(APIView):
+    def get(self, request, id_autor, format=None):
+        formaciones = NivelFormacion.objects.filter(id_autor=id_autor)
+        serializer = NivelFormacionSerializer(formaciones, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, id_autor, format=None):
+        serializer = NivelFormacionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NivelFormacionDetail(APIView):
+
+    def get_object(self, id_autor, pk):
+        try:
+            return NivelFormacion.objects.get(pk=pk, id_autor=id_autor)
+        except NivelFormacion.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_autor, pk, format=None):
+        formacion = self.get_object(id_autor, pk)
+        serializer = NivelFormacionSerializer(formacion)
+        return Response(serializer.data)
+
+    def put(self, request, id_autor, pk, format=None):
+        formacion = self.get_object(id_autor, pk)
+        serializer = IdiomaSerializer(formacion, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id_autor, pk, format=None):
+        formacion = self.get_object(id_autor, pk)
+        formacion.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
