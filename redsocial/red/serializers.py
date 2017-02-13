@@ -26,7 +26,7 @@ class NivelFormacionSerializer(ModelSerializer):
 
     class Meta:
         model = NivelFormacion
-        fields = ('id', 'institucion', 'titulo', 'competencias_adquiridas', 'fecha_inicio', 'fecha_finalizacion', 'tipo_formacion', 'nivel_educativo')
+        fields = ('id', 'institucion', 'titulo_obtenido', 'competencias_adquiridas', 'fecha_inicio', 'fecha_finalizacion', 'tipo_formacion', 'nivel_educativo')
 
 class InteresesSerializer(ModelSerializer):
 
