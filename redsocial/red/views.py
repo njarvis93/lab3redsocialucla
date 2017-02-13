@@ -4,8 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from django.http import Http404
-from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimiento
-from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer
+from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimiento, Perfil, Interes, Idioma, NivelFormacion, ExperienciaLaboral
+from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, \
+    PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer
 from django.shortcuts import render
 
 
@@ -33,7 +34,7 @@ class UsuarioDetail(APIView):
     """
     def get_object(self, pk):
         try:
-            return Usuario.objects.get(pk=pk)
+            return Usuario.objects.get(idioma=pk)
         except Usuario.DoesNotExist:
             raise Http404
 
@@ -114,7 +115,7 @@ class ComentarioDetail(APIView):
     """
     def get_object(self, pk):
         try:
-            return Comentario.objects.get(pk=pk)
+            return Comentario.objects.get(idioma=pk)
         except Comentario.DoesNotExist:
             raise Http404
 
@@ -152,4 +153,109 @@ class AreaConocimientoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = AreaConocimiento.objects.all()
     serializer_class = AreaConocimientoSerializer
 
+class ExperienciaLaboralList(APIView):
 
+    def get_user(self, id):
+        try:
+            return Usuario.objects.get(idioma=id)
+        except Usuario.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id, format = None):
+        perfil = self.get_user(id)
+        experiencia = ExperienciaLaboral.objects.filter(id_autor=perfil.pk)
+        serializer = ExperienciaLaboralSerializer(experiencia, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, id, format = None):
+        serializer = ExperienciaLaboralSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ExperienciaLaboralDetail(APIView):
+
+    def get_object(self, id, id_autor):
+        try:
+            return ExperienciaLaboral.objects.get(idioma=id, id_autor=id_autor)
+        except ExperienciaLaboral.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id_autor, id, format = None):
+        experiencia = self.get_object(id, id_autor)
+        serializer = ExperienciaLaboralSerializer(experiencia)
+        return Response(serializer.data)
+
+    def put(self, request, id, id_autor, format=None):
+        experiencia = self.get_object(id, id_autor)
+        serializer = ExperienciaLaboralSerializer(experiencia, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, id_autor, format=None):
+        experiencia = self.get_object(id, id_autor)
+        experiencia.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class IdiomasList(generics.ListCreateAPIView):
+    queryset = Idioma.objects.all()
+    serializer_class = IdiomaSerializer
+
+class IdiomasDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Idioma.objects.all()
+    serializer_class = IdiomaSerializer
+
+class IdiomasPorUsuarioList(APIView):
+
+    def get(self, request, perfil, format=None):
+        idiomas = Idioma.objects.filter(perfil=perfil)
+        serializer = IdiomaSerializer(idiomas, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, perfil, format=None):
+        serializer = IdiomaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class IdiomaPorUsuarioDetail(APIView):
+
+    def get_object(self, perfil, idioma):
+        try:
+            return Idioma.objects.get(perfil=perfil, id=idioma)
+        except Idioma.DoesNotExist:
+            return Http404
+
+    def get(self, request, perfil, idioma, format=None):
+        idioma = self.get_object(perfil, idioma)
+        serializer = IdiomaSerializer(idioma)
+        return Response(serializer.data)
+
+    def put(self, request, perfil, idioma, format=None):
+        idioma = self.get_object(perfil, idioma)
+        serializer = IdiomaSerializer(idioma, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, perfil, idioma, format=None):
+        idioma = self.get_object(perfil, idioma)
+        idioma.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class PerfilUserList(generics.ListCreateAPIView):
+    queryset = Perfil.objects.all()
+    serializer_class = PerfilSerializer
+
+class PerfilUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Perfil.objects.all()
+    serializer_class = PerfilSerializer
+
+class UserList(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer

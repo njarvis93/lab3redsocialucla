@@ -70,14 +70,14 @@ class Seguidor(models.Model):
     estatus = models.IntegerField()
     fecha_actividad = models.DateField()
 
+
 class Perfil(models.Model):
-    id = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True)
-    intereses = ArrayField(ArrayField(models.TextField()))
+    username = models.ForeignKey(Usuario, related_name='perfil', on_delete=models.CASCADE, primary_key=True)
     areas = models.ManyToManyField(AreaConocimiento)
-    idiomas = models.ManyToManyField(Idioma)
+    idiomas = models.ManyToManyField(Idioma, related_name='idiomas')
     seguidores = models.ManyToManyField(Seguidor, blank=True)
     #siguiendo = models.ManyToManyField(Usuario, blank=True)
-    foto_perfil = models.ImageField(upload_to=user_directory_profile_picture)
+    foto_perfil = models.ImageField(upload_to=user_directory_profile_picture, blank=True)
     url_facebook_perfil = models.URLField()
     url_twitter_perfil = models.URLField()
 
@@ -86,10 +86,14 @@ class NivelFormacion(models.Model):
     titulo_obtenido = models.CharField(max_length=30)
     competencias_adquiridas = models.TextField()
     fecha_inicio = models.DateField()
-    fecha_finalizacion = models.DateField()
+    fecha_finalizacion = models.DateField(blank=True)
     tipo_formacion = models.IntegerField()
     nivel_educativo = models.IntegerField()
-    id_autor = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    id_autor = models.ForeignKey(Perfil, related_name='formacion', on_delete=models.CASCADE)
+
+class Interes(models.Model):
+    descripcion = models.TextField(max_length=100, null=False, blank=False)
+    id_perfil = models.ForeignKey(Perfil, related_name='intereses', on_delete=models.CASCADE)
 
 class Canal(models.Model):
     nombre = models.TextField(max_length=20)
@@ -145,7 +149,7 @@ class ExperienciaLaboral(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     descripcion = models.TextField()
-    id_autor = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    id_autor = models.ForeignKey(Perfil, related_name='experiencia', on_delete=models.CASCADE)
 
 class Likes(models.Model):
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
