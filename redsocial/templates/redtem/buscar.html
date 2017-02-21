@@ -1,17 +1,17 @@
-{% extends '../Base/base.html' %}
+{% extends 'Base/base.html' %}
 
 {% block container %}
 <div class="container">
               <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
                 <div class="container-fluid">
                   <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+                    <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
                   </div>
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                       <li><a href="#"><span class="sr-only">(current)</span></a></li>
-                      <li><a href="{% url 'url_miperfil' %}">Mi Perfil</a></li>
+                      <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
                     </ul>
 
 
@@ -21,9 +21,9 @@
                       </div>
 
                       <button type="submit" class="btn btn-primary naveg">
-                       <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'url_buscar' %}"></a>
+                       <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
                      </button>
-                         <button type="" class="btn btn-primary naveg"><a style="color:white;" href="{% url 'index' %}">cerrar sesion</a>
+                         <button type="" class="btn btn-primary naveg"><a style="color:white;" href="{% url 'red:index' %}">cerrar sesion</a>
                        <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
                       </button>
                     </form>
@@ -33,7 +33,7 @@
       <div class="sig-nav">
         <p>Se ha encontrado (1) resultados</p>
           <div class="list-group">
-              <a href="{% url 'url_perfil' %}" style="width:50%;" class="list-group-item sombra1">
+              <a href="{% url 'red:url_perfil' %}" style="width:50%;" class="list-group-item sombra1">
                 <img src="../../static/images/usuario3.png" style=" height: 50px">
              <h4 class="list-group-item-heading">Rocio Silva</h4>
                 <p class="list-group-item-text">Ing. en Informática</p>

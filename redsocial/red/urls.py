@@ -3,7 +3,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, ActividadesList, PostDetail, PostList,\
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
-    NivelFormacionDetail, administrador, index, home, panel2, canales, panel3, panel4
+    NivelFormacionDetail, administrador, index, panel2, canales, panel3, panel4, canal, crearcanal, buscar, perfil, miperfil, timeline, \
+    olvide
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()),
@@ -29,12 +30,19 @@ urlpatterns = [
     url(r'^formacion/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionList.as_view()),
     url(r'^formacion/(?P<pk>[0-9]+)/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionDetail.as_view()),
     url(r'^$', index, name='index'),
-    url(r'^home/', home, name='home'),
-    url(r'^administrador/', administrador, name='administrador'),
-    url(r'^panel_admin2/', panel2, name='panelAd2'),
-    url(r'^panel_admin3/', panel3, name='panelAd3'),
-    url(r'^panel_admin4/', panel4, name='panelAd4'),
-    url(r'^mis_canales/', canales, name='canales_user'),
+    url(r'^canalprincipal/$', canal, name='url_canalprincipal'),
+    url(r'^crearcanal/$', crearcanal, name='url_crearcanal'),
+    url(r'^miperfil/$', miperfil, name='url_miperfil'),
+    url(r'^perfil/$', perfil, name='url_perfil'),
+    url(r'^timeline/$', timeline, name='url_timeline'),
+    url(r'^olvidemicontrasena/$', olvide, name='url_olvide'),
+    url(r'^buscar/$', buscar, name='url_buscar'),
+    url(r'^administrador/$', administrador, name='administrador'),
+    url(r'^panel_admin2/$', panel2, name='panelAd2'),
+    url(r'^panel_admin3/$', panel3, name='panelAd3'),
+    url(r'^panel_admin4/$', panel4, name='panelAd4'),
+    url(r'^mis_canales/$', canales, name='canales_user'),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,10 +1,10 @@
-{% extends '../Base/base.html' %}
+{% extends 'Base/base.html' %}
 {% block container %}
 <div class="container">
   <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
       <div class="container-fluid">
           <div class="navbar-header">
-              <a class="navbar-brand" href="{% url 'index' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+              <a class="navbar-brand" href="{% url 'red:index' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
             
@@ -16,14 +16,14 @@
                       <input type="password" class="form-control" placeholder="Contraseña">
                   </div>
                 
-                  <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'url_timeline' %}">Ingresar</a>
+                  <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:url_timeline' %}">Ingresar</a>
                        <span class=" glyphicon glyphicon" aria-hidden="true"></span>
                   </button>
                  </form>
 
           </div>
           <div style="float: right">
-                   <a href="{% url 'url_olvide' %}"><h6 style="color: white">¿Has olvidado la contraseña?</h6></a>
+                   <a href="{% url 'red:url_olvide' %}"><h6 style="color: white">¿Has olvidado la contraseña?</h6></a>
                   </div>
       </div>
   </nav>
@@ -78,7 +78,7 @@
                         </TR>
                     </div>
                     <div class="form-group">
-                    <button class="btn btn-primary naveg" style="float: right"><a style="color:white" href="{% url 'url_timeline' %}">REGISTRARSE</a>
+                    <button class="btn btn-primary naveg" style="float: right"><a style="color:white" href="{% url 'red:url_timeline' %}">REGISTRARSE</a>
                        <span class=" glyphicon glyphicon" aria-hidden="true"></span>
                   </button>
                     </div>

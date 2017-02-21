@@ -1,17 +1,17 @@
-{% extends '../Base/base.html' %}
+{% extends 'Base/base.html' %}
 
 {% block container %}
 <div class="container">
               <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
                 <div class="container-fluid">
                   <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+                    <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
                   </div>
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                       <li><a href="#"><span class="sr-only">(current)</span></a></li>
-                      <li><a href="{% url 'url_miperfil' %}">Mi Perfil</a></li>
+                      <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
                     </ul>
 
 
@@ -21,9 +21,9 @@
                       </div>
 
                       <button type="submit" class="btn btn-primary naveg">
-                       <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'url_buscar' %}"></a>
+                       <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
                      </button>
-                         <button type="" class="btn btn-primary naveg"><a style="color:white;" href="{% url 'index' %}">cerrar sesion</a>
+                         <button type="" class="btn btn-primary naveg"><a style="color:white;" href="{% url 'red:index' %}">cerrar sesion</a>
                        <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
                       </button>
                     </form>
@@ -34,9 +34,9 @@
           <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 25%; height: 350px; float:left; margin-left: 25px">
                  <div class="panel-body">
                      <center><img src="../../static/images/usuario11.jpg" align="center" class="img-circle sombra2" style="height: 150px"></center>
-                     <div class="btn btn-default" style="margin: 10%"><a href="{% url 'url_miperfil' %}"> Francisco Alvarado</a></div>
+                     <div class="btn btn-default" style="margin: 10%"><a href="{% url 'red:url_miperfil' %}"> Francisco Alvarado</a></div>
                 </div>
-              <div style="margin-left: 20%" class="btn btn-primary"><a style="color: white" href="{%url 'url_crearcanal'%}">Crear Canal</a></div>
+              <div style="margin-left: 20%" class="btn btn-primary"><a style="color: white" href="{%url 'red:url_crearcanal'%}">Crear Canal</a></div>
           </div>
           <div class="" >
               <div class="panel panel-default post sombra1">

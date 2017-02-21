@@ -1,4 +1,4 @@
-{% extends '../Base/base.html' %}
+{% extends 'Base/base.html' %}
 
 {% block container %}
 <div class="container">
@@ -7,7 +7,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+          <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
            <ul class="nav navbar-nav">
@@ -18,9 +18,9 @@
                  <input type="text" class="form-control" placeholder="Buscar">
               </div>
               <button type="submit" class="btn btn-primary naveg">
-                 <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'url_buscar' %}"></a>
+                 <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
                      </button>
-              <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'index' %}">cerrar sesion</a>
+              <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:index' %}">cerrar sesion</a>
                 <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
               </button>
            </form>
@@ -182,7 +182,7 @@
                 <p class="list-group-item-text">Profesionales egresados de la UCLA especializados en gestionar bases de datos</p>
               </a>
            <div class="list-group">
-              <a href="{%url 'url_canalprincipal'%}" class="list-group-item">
+              <a href="{%url 'red:url_canalprincipal'%}" class="list-group-item">
                 <img src="../../static/images/apps.png" style=" height: 100px">
              <h4 class="list-group-item-heading">Aplicaciones Web</h4>
                 <p class="list-group-item-text">Profesionales con experiencia en la creación de aplicaciones web</p>
