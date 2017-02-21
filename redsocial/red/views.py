@@ -338,3 +338,6 @@ def olvide(request):
 
 def buscar(request):
     return render(request, 'redtem/buscar.html')
+
+def timeline_privado(request):
+    return  render(request, 'redtem/private_timeline.html')
