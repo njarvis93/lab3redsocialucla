@@ -8,6 +8,7 @@ from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimient
 from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, \
     PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer
 from django.shortcuts import render
+from django.core.urlresolvers import reverse_lazy, reverse
 
 
 # Create your views here.
@@ -313,3 +314,9 @@ def administrador(request):
 
 def panel2(request):
     return render(request, 'redtem/panel_admin2.html')
+
+def panel3(request):
+    return  render(request, 'redtem/panel_admin3.html')
+
+def panel4(request):
+    return  render(request, 'redtem/panel_admin4.html')
