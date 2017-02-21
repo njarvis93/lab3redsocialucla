@@ -1,6 +1,5 @@
 {% extends 'Base/base.html' %}
 
-
 {% block title %}
  Administracion
 {% endblock title %}
@@ -10,9 +9,15 @@
         $(document).ready(function() {
             $("#roles").click(function(event){
                 event.preventDefault();
-                var target = $(this).attr("href")
-                alert("ok it's good");
-                $("#central").load(target);
+                $("#central").load("{% url 'red:panelAd2' %}");
+            });
+            $("#permisos").click(function(event){
+                event.preventDefault();
+                $("#central").load("{% url 'red:panelAd3' %}");
+            });
+            $("#create_admin").click(function(event){
+                event.preventDefault();
+                $("#central").load("{% url 'red:panelAd4' %}");
             });
         });
     </script>
@@ -51,11 +56,11 @@
                      <center><img src="../../static/images/desarrolloweb.png" align="center" class="img-circle"></center>
                       <h1 align="center">Panel de Control</h1>
                       <div class="btn-group-vertical btper" align="left" >
-                          <li><a href="redsocial/templates/redtem/panel_admin2.html" id="roles" >Rol </a></li>
-                          <li><a href="3" id="permisos">Permisos </a></li>
+                          <li><a href="" id="roles" >Rol </a></li>
+                          <li><a href="" id="permisos">Permisos </a></li>
+                          <li><a href="4" id="create_admin">Crear Administrador </a></li>
                           <li><a href="#" >Niveles de formacion </a></li>
                           <li><a href="#" >Idiomas </a></li>
-                          <li><a href="4" id="create_admin">Crear Administrador </a></li>
                       </div>
 
                 </div>
