@@ -1,0 +1,67 @@
+{% extends 'Base/base.html'%}
+
+{% block container %}
+<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{%url 'red:url_timeline'%}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li><a href="{%url 'red:url_miperfil'%}">Mi Perfil</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                     </div>
+                     <button type="submit" class="btn btn-primary naveg">
+                         <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
+                     </button>
+                    <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:index' %}">cerrar sesion</a>
+                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="panel panel-default sombra" style="margin: 100px 20% 20% 20%">
+        <div class="panel-body">
+               <form class="form-horizontal">
+              <fieldset>
+                <legend class="colorlet" align="center" style="font-size: 25px">Nuevo Canal</legend>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label colorlet" style="font-size: 17px">Nombre del Canal</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Escriba el Nombre">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="textArea" style="font-size: 17px" class="col-lg-2 control-label colorlet">Descripcion del Canal</label>
+                  <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea"></textarea>
+                  </div>
+                </div>
+                <div class="form-group" style="padding: 0% 0% 0% 50%">
+                    <div style="float:left">
+                        <input type="text" width="30px" class="form-control" placeholder="Agregar Personas">
+                     </div>
+                     <button type="submit" class="btn btn-primary naveg">
+                       <span class=" glyphicon glyphicon-plus" aria-hidden="true"></span>
+                     </button>
+                </div>
+                  <div class="form-control file-caption colorf">
+                  </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancelar</button>
+                    <button type="submit" align="right" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:url_timeline' %}">Crear</a></button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

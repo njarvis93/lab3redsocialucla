@@ -1,0 +1,189 @@
+{% extends 'Base/base.html' %}
+
+{% block container %}
+<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{%url 'red:url_timeline'%}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li><a href="{%url 'red:url_miperfil'%}">Mi Perfil</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                    </div>
+                    <button type="submit" class="btn btn-primary naveg">
+                        <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
+                     </button>
+                    <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:index' %}">cerrar sesion</a>
+                        <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="sig-nav">
+        <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 28%; height: 350px; float:left; margin-left: 10px">
+            <div class="panel-body">
+                <center><img src="../../static/images/apps.png" style="width: 200px" align="center" class="img-circle sombra2"></center>
+              </div>
+        </div>
+            <div class="panel panel-default post sombra1" style="float: right">
+                <h1 align="center">Aplicaciones Web</h1>
+                <p style="text-align: justify">Ingenieros en Informática egresados de la UCLA dedicados a la creación de aplicaciones web para celulares inteligentes, mediante el uso de tecnologías de software del lado del servidor y del cliente que involucran una combinación de procesos de base de datos con el uso de un navegador web a fin de realizar determinadas tareas o mostrar información.</p>
+            </div>
+            <div >
+                <ul class="nav nav-pills navbar-right">
+                  <li  class="active"><a href="#publi" data-toggle="tab" aria-expanded="true">Publicaciones</a></li>
+                  <li><a href="#integrantes" data-toggle="tab" aria-expanded="true">Integrantes</a></li>
+                  <li><a data-toggle="tab" href="#fotos" aria-expanded="true">Fotos</a></li>
+                  <li><a href="#conocer" data-toggle="tab" aria-expanded="true">Conocer más</a></li>
+                </ul>
+    <div id="myTabContent" class="tab-content">
+      <!--Publicaciones-->
+  <div class="tab-pane fade active in" id="publi">
+    <div class="panel panel-default post sombra1" style="margin-top: 5%">
+      <div class="panel-body">
+        <div class="box box-primary">
+          <div class="box-body">
+            <textarea rows="4" class="form-control input-sm" placeholder="Escribe tu publicación" data-bind="value: new_post" ></textarea>
+          </div>
+          <div class="box-footer" align="right">
+            <button type="submit" class="btn btn-primary naveg" data-bind="click: saveNewPost" >Publicar!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <label style="margin-left: 32%; font-size: 20px">Publicaciones Recientes</label>
+
+ <div class="box box-primary sombra1">
+     <div class="box-body">
+         <div class="post" style="margin-bottom: 20px;">
+             <div class="user-block">
+                 <legend class="colorlet" align="center" style="font-size: 15px">Manuel Ramos</legend>
+                 <center><img class="img-responsive" src="../../static/images/pcapple.png" style="height: 180px" alt="user image"></center>
+                 <span class='username'>
+                     <a href="#" ><span data-bind="text: owner.name"></span></a>
+                     <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
+                         <i class='fa fa-times'></i>
+                     </a>
+                 </span>
+                 <span class='description'>Publicación<span data-bind="text: created_relative"></span></span>
+             </div>
+             <p data-bind="text: content">
+             </p>
+             <ul class="list-inline">
+                 <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
+             </ul>
+             <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario" style="float:left">
+             <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
+             <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
+                 <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+             </div>
+         </div>
+     </div>
+ </div>
+      <div class="box box-primary sombra1">
+      <div class="box-body">
+        <div class="post" style="margin-top: 2%">
+          <div class="user-block">
+              <legend class="colorlet" align="center" style="font-size: 15px">Martha Medina</legend>
+            <center><img class="img-responsive" src="../../static/images/paisaje.jpg" style="height: 200px;" alt="user image"></center>
+            <span class='username'>
+              <a href="#" ><span data-bind="text: owner.name"></span></a>
+              <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
+                <i class='fa fa-times'></i>
+              </a>
+            </span>
+            <span class='description'><span data-bind="text: created_relative"></span></span>
+          </div>
+          <p data-bind="text: content">
+          </p>
+          <ul class="list-inline">
+            <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
+          </ul>
+          <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario">
+           <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
+          <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
+          <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  <!--Fotos-->
+      <div class="tab-pane fade " id="fotos">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+          <div class="">
+            <div class="form-group">
+              <h4 class="colorlet">Fotos de perfil</h4>
+              <img src="../../static/images/redessociales.jpg" style="height: 100px" class="img-thumbnail">
+              <img src="../../static/images/pcapple.png" style="height: 100px" class="img-thumbnail">
+              <img src="../../static/images/informatica.png" style="height: 100px" class="img-thumbnail">
+            </div>
+            <div class="form-group">
+              <h4 class="colorlet">Fotos Publicadas</h4>
+              <img src="../../static/images/rededi.JPG" class="img-thumbnail" style="width: 150px;height: 150px">
+              <img src="../../static/images/desa.jpg" class="img-thumbnail"style="width: 150px;height: 150px">
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+
+        <!--Conocer más-->
+      <div class="tab-pane fade " id="conocer">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+          <div>
+                <label style="font-size: 20px; color:#01579b" >Autor:</label>
+              <a style="font-size: 18px; color:#777777; margin-left: 20px" href="{% url 'red:url_perfil' %}">
+                <img src="../../static/images/usuario3.png" style=" height: 30px">
+                  Rocio Silva
+              </a>
+              </div>
+           <br>
+             <div class="form-group">
+               <label style="font-size: 20px;  color:#01579b">Fecha de creación:</label>
+               <label style="font-size: 17px">03 de Noviembre de 2015</label>
+               <span class="glyphicon glyphicon-calendar"></span>
+             </div>
+         </div>
+        </div>
+      </div>
+
+        <!-- Integrantes -->
+        <div class="tab-pane fade " id="integrantes">
+       <div class="panel panel-default post sombra1" style="margin-top: 5%;">
+         <div class="panel-body">
+
+           <div class="list-group">
+              <a href="{% url 'red:url_perfil' %}" class="list-group-item">
+                <img src="../../static/images/usuario3.png" style=" height: 50px">
+             <h4 class="list-group-item-heading">Rocio Silva</h4>
+                <p class="list-group-item-text">Ing. en Informática</p>
+              </a>
+              <a href="#" class="list-group-item">
+                 <img src="../../static/images/usuario9.png" style="height: 50px">
+                <h4 class="list-group-item-heading">Petra Gómez</h4>
+                <p class="list-group-item-text">Analista de sistemas</p>
+              </a>
+               <a href="#" class="list-group-item">
+                 <img src="../../static/images/usuario11.jpg" style="height: 50px">
+                <h4 class="list-group-item-heading">Francisco Alvarado</h4>
+                <p class="list-group-item-text">Ing. en Informática</p>
+              </a>
+            </div>
+
+         </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock container %}

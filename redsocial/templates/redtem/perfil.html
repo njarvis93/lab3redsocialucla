@@ -1,0 +1,404 @@
+{% extends 'Base/base.html' %}
+
+{% block container %}
+<div class="container">
+  <!--Barra de navegacion-->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+           <ul class="nav navbar-nav">
+              <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
+           </ul>
+           <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                 <input type="text" class="form-control" placeholder="Buscar">
+              </div>
+              <button type="submit" class="btn btn-primary naveg">
+                 <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
+              </button>
+              <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:index' %}">Cerrar sesion</a>
+                <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+              </button>
+           </form>
+        </div>
+      </div>
+    </nav>
+  <!-- foto, configuracion, seguir-->
+    <div style="margin: 70px 0px 50px 0px; height: 300px" class="panel panel-default">
+      <button class="btn btn-default colorlet" style="margin: 10px 0px 0px 80%" >Configuracion <span class="glyphicon glyphicon glyphicon-cog"></span></button>
+      <div class="marco2">
+        <center><img src="../../static/images/Usuario3.png" style="width: 20%; height: 65%" align="center" class="img-circle"></center>
+      </div>
+      <button class="btn btn-primary" style="float: left; margin-left: 15px">Seguir <span class="glyphicon glyphicon-user"></span></button>
+      <label class="colorlet" style="font-size: 25px; margin-left: 32%; float: left">Rocio Silva</label>
+      <button class="btn btn-default colorlet" style=" margin-left: 90px;" >Twitter <img href="https://www.facebook.com/" style="width: 30px;height: 30px;" src="../../static/images/twitter.png"></button>
+      <button class="btn btn-default colorlet">Facebook <img href="https://www.facebook.com/" style="width: 30px;height: 30px;" src="../../static/images/facebook.png"></button>
+      </div>
+
+  <!-- div seguidores seguidos-->
+    <div class="panel panel-default" style="background-color: #ffffff; width: 28%; height:450px ;float:left; margin-right:0px">
+      <ul class="nav nav-pills" style="margin: 15px 0px 0px 20px">
+        <li class="active"><a href="#seguidores" data-toggle="tab" aria-expanded="true">Seguidores<span class="badge">3</span></a></li>
+        <li><a href="#seguidos" data-toggle="tab" aria-expanded="true">Seguidos<span class="badge">2</span></a></li>
+      </ul>
+      <div class="tab-content">
+      <div class="tab-pane fade active in" id="seguidores" style=" margin: 20px 20px 20px 20px">
+      <div lass="list-group">
+          <a href="#" class="list-group-item" style="background: #EEEEEE">
+            <img src="../../static/images/usuario4.png" class="imglist img-circle">
+            <h5 class="list-group-item-heading">Martha Medina</h5>
+            <p class="list-group-item-text">Ingeniero en Informática</p>
+          </a>
+          <a href="#" class="list-group-item" style="background: #EEEEEE">
+            <img src="../../static/images/usuario2.png" class="imglist img-circle">
+            <h5 class="list-group-item-heading">Jesús Hernández</h5>
+            <p class="list-group-item-text">Analista de Sistemas</p>
+          </a>
+          <a href="#" class="list-group-item" style="background: #EEEEEE">
+            <img src="../../static/images/usuario11.jpg" class="imglist img-circle">
+            <h5 class="list-group-item-heading">Francisco Alvarado</h5>
+            <p class="list-group-item-text">Ingeniero en Informática</p>
+          </a>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="seguidos" style=" margin: 20px 20px 0px 20px">
+        <div lass="list-group">
+          <a href="#" class="list-group-item" style="background: #EEEEEE">
+            <img src="../../static/images/usuario1.png" class="imglist img-circle">
+            <h5 class="list-group-item-heading">Pedro Perez</h5>
+            <p class="list-group-item-text">Ingeniero en Informática</p>
+          </a>
+          <a href="#" class="list-group-item" style="background: #EEEEEE">
+            <img src="../../static/images/usuario2.png" class="imglist img-circle">
+            <h5 class="list-group-item-heading">Jesús Hernández</h5>
+            <p class="list-group-item-text">Analista de Sistemas</p>
+          </a>
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <!--menu publicaciones, intereses, formacion....-->
+  <div >
+    <ul class="nav nav-tabs navbar-right">
+      <li  class="active"><a href="#publi" data-toggle="tab" aria-expanded="true">Publicaciones</a></li>
+      <li><a href="#canales" data-toggle="tab" aria-expanded="true">Canales</a></li>
+      <li><a data-toggle="tab" href="#fotos" aria-expanded="true">Fotos</a></li>
+      <li><a href="#infobasi" data-toggle="tab" aria-expanded="true">Información Básica</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle " data-toggle="dropdown" href="#" aria-expanded="true">
+          Conocer Más <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#intereses" data-toggle="tab">Intereses   <span class="glyphicon glyphicon-info-sign"></span></a></li>
+          <li><a href="#formacion" data-toggle="tab">Formación   <span class="glyphicon glyphicon-folder-open"></span></a></li>
+          <li><a href="#areacono" data-toggle="tab">Areas de Conocimiento  <span class="glyphicon glyphicon-list"></span></a></li>
+          <li><a href="#explab" data-toggle="tab">Experiencia Laboral   <span class="glyphicon glyphicon-briefcase"></span></a></li>
+        </ul>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <!--Publicaciones-->
+  <div class="tab-pane fade active in" id="publi">
+    <div class="panel panel-default post sombra1" style="margin-top: 5%">
+      <div class="panel-body">
+        <div class="box box-primary">
+          <div class="box-body">
+            <textarea rows="4" class="form-control input-sm" placeholder="Escribe tu publicación" data-bind="value: new_post" ></textarea>
+          </div>
+          <div class="box-footer" align="right">
+            <button type="submit" class="btn btn-primary naveg" data-bind="click: saveNewPost" >Publicar!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <label style="margin-left: 30px; font-size: 20px">Publicaciones Recientes</label>
+    <div class="box box-primary sombra1">
+      <div class="box-body">
+        <div class="post">
+          <div class="user-block">
+            <center><img class="img-thumbnail" src="../../static/images/redessociales.jpg" style="height: 150px;" alt="user image"></center>
+            <span class='username'>
+              <a href="#" ><span data-bind="text: owner.name"></span></a>
+              <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
+                <i class='fa fa-times'></i>
+              </a>
+            </span>
+            <span class='description'>Tendencias en el diseño de las redes sociales<span data-bind="text: created_relative"></span></span>
+          </div>
+          <p data-bind="text: content">
+          </p>
+          <ul class="list-inline">
+            <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
+          </ul>
+          <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario">
+          <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
+          <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
+          <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+        </div>
+      </div>
+    </div>
+
+      <div class="box box-primary sombra1">
+      <div class="box-body">
+        <div class="post" style="margin-top: 2%">
+          <div class="user-block">
+            <center><img class="img-thumbnail" src="../../static/images/paisaje.jpg" style="height: 200px;" alt="user image"></center>
+            <span class='username'>
+              <a href="#" ><span data-bind="text: owner.name"></span></a>
+              <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
+                <i class='fa fa-times'></i>
+              </a>
+            </span>
+            <span class='description'><span data-bind="text: created_relative"></span></span>
+          </div>
+          <p data-bind="text: content">
+          </p>
+          <ul class="list-inline">
+            <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
+          </ul>
+          <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario">
+           <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
+          <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
+          <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+        </div>
+      </div>
+    </div>
+   </div>
+    </div>
+
+  </div>
+      <!--Mis canales-->
+      <div class="tab-pane fade " id="canales">
+       <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+
+           <div class="list-group">
+              <a href="#" class="list-group-item">
+                <img src="../../static/images/desarrolloweb.png" style=" height: 100px">
+             <h4 class="list-group-item-heading">Desarrollo Web</h4>
+                <p class="list-group-item-text">Profesionales con experiencia en la creación de páginas web</p>
+              </a>
+              <a href="#" class="list-group-item">
+                 <img src="../../static/images/redes.png" style="height: 100px">
+                <h4 class="list-group-item-heading">Redes</h4>
+                <p class="list-group-item-text">Profesionales con experienca en Redes de computadoras</p>
+              </a>
+            </div>
+
+         </div>
+       </div>
+      </div>
+      <!--Fotos-->
+      <div class="tab-pane fade " id="fotos">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+          <div class="">
+            <div class="form-group">
+              <h4 class="colorlet">Fotos de perfil</h4>
+              <img src="../../static/images/usuario7.png" style="height: 150px" class="img-thumbnail">
+              <img src="../../static/images/usuario8.png" style="height: 150px" class="img-thumbnail">
+              <img src="../../static/images/usuario9.png" style="height: 150px" class="img-thumbnail">
+              <img src="../../static/images/usuario3.png" style="height: 150px" class="img-thumbnail">
+            </div>
+            <div class="form-group">
+              <h4 class="colorlet">Fotos Publicadas</h4>
+              <img src="../../static/images/rededi.JPG" class="img-thumbnail" style="height: 150px">
+              <img src="../../static/images/desa.jpg" class="img-thumbnail"style="height: 150px">
+              <img src="../../static/images/certificado.jpg" class="img-thumbnail"style="height: 150px">
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+      <!--Informacion basica-->
+      <div class="tab-pane fade " id="infobasi">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+              <div>
+                <label style="font-size: 20px; color:#01579b" >Nombres:</label>
+                <label style="font-size: 17px" >Rocio Virginia</label>
+              </div>
+           <br>
+              <div class="form-group">
+                <label style="font-size: 20px; color: #01579b">Apellidos:</label>
+                <label style="font-size: 17px">Silva Arteta</label>
+              </div>
+              <div class="form-group">
+                <label style="font-size: 20px; color:#01579b">Email:</label>
+                <label href="" style="font-size: 17px">rocios_12@gmail.com</label>
+                <span class="glyphicon glyphicon-envelope"></span>
+              </div>
+             <div class="form-group">
+               <label style="font-size: 20px;  color:#01579b">Fecha de Nacimiento:</label>
+               <label style="font-size: 17px">13 de Marzo de 1989</label>
+              <span class="glyphicon glyphicon-calendar"></span>
+             </div>
+              <div class="form-group">
+                 <label style="font-size: 20px; color:#01579b">Teléfono Móvil:</label>
+                <label style="font-size: 17px" >0416-096-0348</label>
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="form-group">
+                <label style="font-size: 20px; color:#01579b">Teléfono de Oficina:</label>
+                <label style="font-size: 17px">0251-094-0365</label>
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="form-group">
+                <label style="font-size: 20px; color:#01579b">Teléfono Fijo:</label>
+                <label style="font-size: 17px">0251-947-4856</label>
+                <span class="glyphicon glyphicon-earphone"></span>
+              </div>
+              <div class="form-group">
+                <label style="font-size: 20px; color:#01579b">Dirección:</label>
+                <label style="font-size: 17px">Av. Florencio Jiménez</label>
+                <span class="glyphicon glyphicon-map-marker"></span>
+              </div>
+         </div>
+        </div>
+      </div>
+      <!--Intereses-->
+      <div class="tab-pane fade " id="intereses">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+              <div href="#" class="form-group">
+             <h4 class="list-group-item-heading colorlet">Desarrollo de Páginas Web</h4>
+                <p class="list-group-item-text">Mi principal actividad profesional es el desarrollo de sitios web</p>
+              </div>
+           <br>
+              <div href="#" class="form-group">
+                <h4 class="list-group-item-heading colorlet">Redes</h4>
+                <p class="list-group-item-text">Conozco lo básico de esta rama de la informática, sin embargo seguiré indagando para así obtener altos conocimientos de la misma</p>
+              </div>
+           <br>
+               <div href="#" class="form-group">
+                <h4 class="list-group-item-heading colorlet">Dibujo</h4>
+                <p class="list-group-item-text">En mis tiempos libres me dedico a realizar dibujos manuales y computarizados con cualquier tipo de aplicación para el diseño</p>
+              </div>
+         </div>
+        </div>
+      </div>
+      <!--Formacion-->
+      <div class="tab-pane fade " id="formacion">
+        <div class="panel panel-default sombra1" style="margin-top: 5%; width: 70%; float:right">
+         <div class="panel-body">
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <label class="colorlet" style="font-size: 25px">Formación Académica</label>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="colorlet">
+                  <td>Institución</td>
+                  <td>Título obtenido</td>
+                  <td>Duración</td>
+                </tr>
+                <tr>
+                  <td>UCLA - Dcyt</td>
+                  <td>Ing. en Informática</td>
+                  <td>2010-2006</td>
+                </tr>
+                <tr>
+                  <td>UCLA - Dcyt</td>
+                  <td>Diplomado en Base de Datos</td>
+                  <td>2006-2008</td>
+                </tr>
+              <tr>
+                  <td>UCLA - Dcyt</td>
+                  <td>Diplomado en Desarrollo web</td>
+                  <td>2008-2010</td>
+                </tr>
+              </tbody>
+            </table>
+           <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <label class="colorlet" style="font-size: 25px">Formación Complementaria</label>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="colorlet">
+                  <td>Institución</td>
+                  <td>Certificado</td>
+                  <td>Duración</td>
+                </tr>
+                <tr>
+                  <td>CADIf1</td>
+                  <td>Técnico en Reparación y mantenimiento de PCs</td>
+                  <td>90 horas</td>
+                </tr>
+              <tr>
+                  <td>ORACLE</td>
+                  <td>Introducción a Oracle SQL</td>
+                  <td>25 horas</td>
+                </tr>
+              </tbody>
+            </table>
+         </div>
+        </div>
+      </div>
+     <!--Areas de conocimiento-->
+      <div class="tab-pane fade " id="areacono">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+               <div class="list-group">
+              <a href="#" class="list-group-item">
+                <img src="../../static/images/based.png" style=" height: 100px">
+             <h4 class="list-group-item-heading">Base de datos</h4>
+                <p class="list-group-item-text">Es mi principal actividad laboral</p>
+              </a>
+              <a href="#" class="list-group-item">
+                 <img src="../../static/images/apps.png" style="height: 100px">
+                <h4 class="list-group-item-heading">Desarrollo de aplicaciones móviles</h4>
+                <p class="list-group-item-text">Como segunda actividad profesional, me dedico al desarrollo de aplicaciones móviles</p>
+              </a>
+            </div>
+         </div>
+        </div>
+      </div>
+      <!--Experiencia laboral-->
+      <div class="tab-pane fade " id="explab">
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+         <div class="panel-body">
+             <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <label class="colorlet" style="font-size: 25px">Experiencia Laboral</label>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="colorlet">
+                  <td>Empresa</td>
+                  <td>Descripción del cargo</td>
+                  <td>Duración</td>
+                </tr>
+                <tr>
+                  <td>CIDESA C.A.</td>
+                  <td>Programador</td>
+                  <td>207-2010</td>
+                </tr>
+                <tr>
+                  <td>Droguería Nena C.A.</td>
+                  <td>Programador</td>
+                  <td>2010-2014</td>
+                </tr>
+              <tr>
+                  <td>Geroc 200 C.A.</td>
+                  <td>Gerente de Base de Datos</td>
+                  <td>2014-Actualidad</td>
+                </tr>
+              </tbody>
+            </table>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

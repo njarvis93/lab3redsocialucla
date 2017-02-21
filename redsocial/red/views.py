@@ -300,12 +300,6 @@ class NivelFormacionDetail(APIView):
         formacion.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-def index(request):
-    return render(request, 'redtem/integrantescanal.html')
-
-def home(request):
-    return render(request, 'redtem/timline.html')
-
 def canales(request):
     return render(request, 'redtem/canal.html')
 
@@ -320,3 +314,30 @@ def panel3(request):
 
 def panel4(request):
     return  render(request, 'redtem/panel_admin4.html')
+
+def canal(request):
+    return render(request, 'redtem/canal.html')
+
+def crearcanal(request):
+    return render(request, 'redtem/crearcanal.html')
+
+def index(request):
+    return render(request, 'redtem/principal.html')
+
+def miperfil(request):
+    return render(request, 'redtem/miperfil.html')
+
+def perfil(request):
+    return render(request, 'redtem/perfil.html')
+
+def timeline(request):
+    return render(request, 'redtem/timeline.html')
+
+def olvide(request):
+    return render(request, 'redtem/olvidemicont.html')
+
+def buscar(request):
+    return render(request, 'redtem/buscar.html')
+
+def timeline_privado(request):
+    return  render(request, 'redtem/private_timeline.html')

@@ -1,0 +1,150 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block extrastatic %}
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}"/>
+{% endblock extrastatic %}
+
+{% block extra_js_head %}
+    <script src="{% static 'js/index.js' %}"></script>
+{% endblock extra_js_head %}
+
+{% block container %}
+<div class="container">
+  <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+              <ul class="nav navbar-nav">
+                  <li><a href="#"><span class="sr-only">(current)</span></a></li>
+                  <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
+              </ul>
+              <form class="navbar-form navbar-right" role="search">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Buscar">
+                  </div>
+                  <button type="submit" class="btn btn-primary naveg" href="{% url 'red:url_buscar' %}">
+                       <span class=" glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                  <button type="" class="btn btn-primary naveg" href="{% url 'red:index' %}">Cerrar Sesión
+                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+                  </button>
+              </form>
+          </div>
+      </div>
+  </nav>
+
+        <div class="sig-nav">
+                 <div class="panel-body">
+                     <center><img src="../../static/images/perfil_01.jpg" align="left" class="img-circle"></center>
+                  
+      
+  
+          <div class="panel panel-default post" style="float: right; width: 70%;" >
+         <div class="col-x">
+                
+                    <div class="form-group">
+                        <label for="contenido" class="control-label">Escribe tu publicacion</label>
+                        <textarea name="contenido" id="contenido" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <p style="float: right"><a class="btn btn-primary btn-lg naveg"><span class="glyphicon glyphicon-camera"></span></a></p>
+                      
+                        <p style="float: right"><a class="btn btn-primary btn-lg naveg"><span class="glyphicon glyphicon-user"></span></a></p>
+                        <p style="float: center"><a class="btn btn-primary btn-lg naveg" align="center">Publicar<span class="glyphicon glyphicon-world"></span></a></p>
+                    </div>
+
+            </div>
+
+        </div>
+        <div align="left">
+</br>
+</br>
+</br>
+</br>
+</br>                 <dl>
+                   <dt><h6><a href="{% url 'red:canales_user' %}">Canales</a></h6></dt>
+                   <dt><h6><a href="#">Seguidores</a></h6></dt>
+                   <dt><h6><a href="#">Seguidos</a></h6></dt>
+
+                 </dl>
+
+                  </div>
+          
+   </div>
+   <div class="panel panel-default" style="background-color: #ffffff; width: 104%; height: 630px; float:left; margin-left: 40px">
+   <div class="container">
+    <div class="page-header text-center">
+    <h5 id="timeline">Publicaciones Anteriores</h5>
+    </div>
+    <ul class="timeline">
+        <li>
+          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="hace 2 horas  via Twitter" id=""></i></a></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <img src="../../static/images/inicio.png"  class="img-center" align="center" />
+              
+            
+            <div class="timeline-body">
+              <p>"El futuro del  comercio electronico"
+              Las tendencias del comercio electronico cambian a una enorme velocidad. La aplicacion de los aplicacion de los avances tecnologicos y la adaptacion de un cliente en continua transformacion marcan las pautas de un buen negocio.</p>
+              
+            </div>
+            
+            <div class="timeline-footer">
+                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                <a><i class="glyphicon glyphicon-share"></i></a>
+                
+            </div>
+            </div>
+          </div>
+        </li>
+        
+        <li  class="timeline-inverted">
+          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
+          <div class="timeline-panel">
+            <div class="panel-body">
+              
+              </div>
+          
+          <div class="timeline-body">
+              <p>El último movimiento de Apple ha incrementado con fuerza los rumores en torno a la posibilidad de que el iPhone 8, que se prevé sea presentado en septiembre, incorpore finalmente el sistema de carga inalámbrica, como se viene rumoreando desde hace tiempo</p>
+              
+            </div>
+             <div class="timeline-footer">
+                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                <a><i class="glyphicon glyphicon-share"></i></a>
+                <a class="pull-right"></a>
+            </div>
+          </div>
+        </li>
+        
+      
+        <li>
+          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
+          <div class="timeline-panel">
+      
+            <div class="timeline-body">
+              <p>Conferencia de Redes el 24/02 en el Decanato de Ciencias y Tecnologia a las 3pm</p>
+              
+            </div>
+            
+            <div class="timeline-footer">
+                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                <a><i class="glyphicon glyphicon-share"></i></a>
+                <a class="pull-right"></a>
+            </div>
+          </div>
+        </li>
+      
+        <li class="clearfix" style="float: none;"></li>
+    </ul>
+</div>
+</div><!-- fin del dev debajo del nav-->
+
+</div><!-- fin del general-->
+</div>
+<!---el nuevo-->
+
+{% endblock %}
