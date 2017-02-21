@@ -1,0 +1,50 @@
+body{
+	background-color: #e8eaf6;
+}
+
+.colorlet{
+	color: #009688;
+}
+.crearform{
+	background-color: #eee;
+	padding: 30px 30px;
+	margin: 100px 0px 0px 0px;
+}
+
+.imglist{
+	width: 50px;
+	height: 50px;
+}
+
+.btper{
+	margin: 30px;
+
+}
+.colorf{
+	background: #e0f2f1 ;
+}
+.naveg{
+	background: #0288d1;
+}
+img{
+	height: 100px;
+	align-content: center;
+}
+
+.sig-nav{
+	margin: 100px 0px 0px 0px;
+}
+
+
+.post{
+	width:65%;
+	margin-right: 40px;
+	background-color: #ffffff;
+	float: right;
+	padding: 10px;
+}
+
+
+.bot{
+	text-decoration-color: #009688;
+}
