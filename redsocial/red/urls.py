@@ -3,7 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, ActividadesList, PostDetail, PostList,\
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
-    NivelFormacionDetail
+    NivelFormacionDetail, administrador, index, home, panel2, canales
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()),
@@ -28,6 +28,11 @@ urlpatterns = [
     url(r'^todos/', UserList.as_view()),
     url(r'^formacion/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionList.as_view()),
     url(r'^formacion/(?P<pk>[0-9]+)/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionDetail.as_view()),
+    url(r'^$', index, name='index'),
+    url(r'^home/', home, name='home'),
+    url(r'^administrador/', administrador, name='administrador'),
+    url(r'^panel_admin2/', panel2, name='panelAd2'),
+    url(r'^mis_canales/', canales, name='canals_user'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

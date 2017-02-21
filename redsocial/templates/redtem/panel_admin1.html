@@ -1,0 +1,77 @@
+{% extends 'Base/base.html' %}
+
+
+{% block title %}
+ Administracion
+{% endblock title %}
+
+{% block extra_js_head %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#roles").click(function(event){
+                event.preventDefault();
+                var target = $(this).attr("href")
+                alert("ok it's good");
+                $("#central").load(target);
+            });
+        });
+    </script>
+{% endblock extra_js_head %}
+
+{% block container %}
+
+    <div class="container">
+      <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+                  </div>
+
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+                    <form class="navbar-form navbar-right" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                      </div>
+
+                      <button type="submit" class="btn btn-primary naveg">
+                       <span class=" glyphicon glyphicon-search" aria-hidden="true"></span>
+                      </button>
+                         <button type="" class="btn btn-primary naveg">
+                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+      </nav>
+    </div>
+    <div class="sig-nav">
+          <div class="panel panel-default" style="background-color: #ffffff; width: 25%; height: 500px; float:left; margin-left: 40px">
+                 <div class="panel-body">
+                     <center><img src="../../static/images/desarrolloweb.png" align="center" class="img-circle"></center>
+                      <h1 align="center">Panel de Control</h1>
+                      <div class="btn-group-vertical btper" align="left" >
+                          <li><a href="redsocial/templates/redtem/panel_admin2.html" id="roles" >Rol </a></li>
+                          <li><a href="3" id="permisos">Permisos </a></li>
+                          <li><a href="#" >Niveles de formacion </a></li>
+                          <li><a href="#" >Idiomas </a></li>
+                          <li><a href="4" id="create_admin">Crear Administrador </a></li>
+                      </div>
+
+                </div>
+          </div>
+
+     </div>
+
+
+
+<div class="container align-right">
+    <div class="panel panel-default "  style="margin: 2px 10% 10% 30%" align="right">
+        <div class="panel-body" id="central">
+            Hola aqui estoy!!
+        </div>
+     </div>
+</div>
+
+
+{% endblock container %}

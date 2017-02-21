@@ -298,3 +298,18 @@ class NivelFormacionDetail(APIView):
         formacion = self.get_object(id_autor, pk)
         formacion.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+def index(request):
+    return render(request, 'redtem/integrantescanal.html')
+
+def home(request):
+    return render(request, 'redtem/timline.html')
+
+def canales(request):
+    return render(request, 'redtem/canal.html')
+
+def administrador(request):
+    return render(request, 'redtem/panel_admin1.html')
+
+def panel2(request):
+    return render(request, 'redtem/panel_admin2.html')
