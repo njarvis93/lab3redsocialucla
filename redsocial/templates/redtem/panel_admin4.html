@@ -1,0 +1,102 @@
+{% extends 'Base/base.html' %}
+
+{% block container %}
+
+
+    <div class="container">
+      <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
+                  </div>
+
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+                    <form class="navbar-form navbar-right" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                      </div>
+
+                      <button type="submit" class="btn btn-primary naveg">
+                       <span class=" glyphicon glyphicon-search" aria-hidden="true"></span>
+                      </button>
+                         <button type="" class="btn btn-primary naveg">
+                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+      </nav>
+    </div>
+
+     <div class="sig-nav">
+          <div class="panel panel-default" style="background-color: #ffffff; width: 25%; height: 500px; float:left; margin-left: 40px">
+                 <div class="panel-body">
+                     <center><img src="../../static/images/desarrolloweb.png" align="center" class="img-circle"></center>
+                      <h1 align="center">Panel de Control</h1>
+
+
+                      <div class="btn-group-vertical btper" align="left" >
+
+                          <li><a href="2" >Rol </a></li>
+                          <li><a href="3" >Permisos </a></li>
+                           <li><a href="#" >Niveles de formacion </a></li>
+                          <li><a href="#" >Idiomas </a></li>
+                          <li><a href="4" >Crear Administrador </a></li>
+                      </div>
+
+                </div>
+          </div>
+
+    </div>
+
+    <div class="container align-right">
+      <div class="panel panel-default" style="margin: 2px 10% 10% 30%" align="right">
+        <div class="panel-body">
+               <form class="form-horizontal">
+              <fieldset>
+
+                   <p> <center><img src="../../static/images/icono_usuario.jpg" align="center" class="img-circle"></center></p>
+                    <center> <legend class="colorlet" align="center" style="font-size: 25px">Nuevo Administrador</legend></center>
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label colorlet" style="font-size: 17px">Nombre</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Escriba el Nombre">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                     <label class="col-lg-2 control-label colorlet" style="font-size: 17px">Apellido</label>
+                    <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Escriba el Apellido">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                     <label class="col-lg-2 control-label colorlet" style="font-size: 17px">Username</label>
+                    <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Escriba el Nombre de Usuario">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                     <label class="col-lg-2 control-label colorlet" style="font-size: 17px">Password</label>
+                    <div class="col-lg-10">
+                    <input type="text" class="form-control" id="password" placeholder="Escriba la contraseña">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default naveg">Cancelar</button>
+                    <button type="submit" align="right" class="btn btn-success naveg">Guardar</button>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+        </div>
+     </div>
+   </div>
+{% endblock container %}
