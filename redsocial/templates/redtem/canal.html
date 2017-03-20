@@ -1,30 +1,11 @@
 {% extends 'Base/base.html' %}
 
+{% block title %}
+    Canal
+{% endblock title %}
 {% block container %}
 <div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{%url 'red:url_timeline'%}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav">
-                    <li><a href="{%url 'red:url_miperfil'%}">Mi Perfil</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Buscar">
-                    </div>
-                    <button type="submit" class="btn btn-primary naveg">
-                        <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
-                     </button>
-                    <button type="" class="btn btn-primary naveg"><a style="color:white" href="{% url 'red:index' %}">cerrar sesion</a>
-                        <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
+
     <div class="sig-nav">
         <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 28%; height: 350px; float:left; margin-left: 10px">
             <div class="panel-body">
@@ -86,33 +67,6 @@
          </div>
      </div>
  </div>
-      <div class="box box-primary sombra1">
-      <div class="box-body">
-        <div class="post" style="margin-top: 2%">
-          <div class="user-block">
-              <legend class="colorlet" align="center" style="font-size: 15px">Martha Medina</legend>
-            <center><img class="img-responsive" src="../../static/images/paisaje.jpg" style="height: 200px;" alt="user image"></center>
-            <span class='username'>
-              <a href="#" ><span data-bind="text: owner.name"></span></a>
-              <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
-                <i class='fa fa-times'></i>
-              </a>
-            </span>
-            <span class='description'><span data-bind="text: created_relative"></span></span>
-          </div>
-          <p data-bind="text: content">
-          </p>
-          <ul class="list-inline">
-            <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
-          </ul>
-          <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario">
-           <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
-          <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
-          <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
-        </div>
-      </div>
-    </div>
-   </div>
   </div>
   <!--Fotos-->
       <div class="tab-pane fade " id="fotos">

@@ -1,0 +1,37 @@
+{% extends 'Base/base.html' %}
+
+{% block title %}
+Mis Canales
+{% endblock title%}
+{% block extrastatic %}
+    <style>
+        .circular{
+                border-radius: 50%;
+                width: 75px;
+                height: 75px;
+                display: inline-block;
+            }
+    </style>
+{% endblock extrastatic %}
+{% block container %}
+    <div class="container" ng-controller="CMisCanales">
+    <div class="sig-nav">
+        <div class="panel panel-default">
+            <div class="panel-body center-block"><h4>Mis</h4></div>
+        </div>
+        <div ng-repeat="canal in canales">
+            <div class="col-lg-4 ">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    <h4 class="panel-title"><a href="{% url 'red:url_canalprincipal' %}" ng-bind="canal.nombre"></a></h4>
+                    </div>
+                    <div class="panel-body">
+                        <img class="circular col-lg-4" src="../../static/images/icon_user1.png">
+                        <p class="col-ls-8" ng-bind="canal.descripcion"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock container %}
