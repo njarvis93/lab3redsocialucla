@@ -3,57 +3,57 @@
     Publicaciones
 {% endblock title %}
 {% block container %}
-<div class="container">
-      <div class="sig-nav">
-          <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 25%; height: 350px; float:left; margin-left: 25px">
-                 <div class="panel-body">
-                     <img src="../../static/images/usuario11.jpg" align="center" class="img-circle sombra2" style="height: 150px">
-                     <div class="btn btn-default" style="margin: 10%"><a href="{% url 'red:url_miperfil' %}"> Francisco Alvarado</a></div>
+    <div class="container" ng-controller="CPost">
+    <div class="row sig-nav">
+        <div class="col-lg-2">
+            <div class="well well-sm">
+                <a href="{% url 'red:canales_user' %}" class="text-primary">CANALES</a>
+            </div>
+            <div class="well well-sm">
+                <a href="#" class="text-primary">SEGUIDORES</a>
+            </div>
+            <strong>CREAR</strong>
+            <br>
+            <a href="{% url 'red:url_crearcanal' %}">Nuevo Canal</a>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img class="col-lg-3 circular" src="../../static/images/icon_user1.png">
+                        <textarea class="col-lg-9" placeholder="¿Qué quieres contarnos?" rows="3"></textarea>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" class="btn btn-primary btn--m bottom-right">Publicar</button>
+                    </div>
                 </div>
-              <div style="margin-left: 20%" class="btn btn-primary"><a style="color: white" href="{%url 'red:url_crearcanal'%}">Crear Canal</a></div>
-
-              <div style="margin-left: 25%; margin-top: 2%" class="btn btn-primary"><a style="color: white" href="{%url 'red:timeline_privado'%}">Privado</a></div>
-          </div>
-          <div class="" >
-              <div class="panel panel-default post sombra1">
-                  <div class="panel-body">
-                    <div class="box box-primary">
-                        <div class="box-body">
-                            <textarea rows="4" class="form-control input-sm" placeholder="Escribe tu publicación" data-bind="value: new_post" ></textarea>
+            </div>
+            <div ng-repeat="post in posts | orderBy: 'fecha_creacion': true">
+                <div class="col-lg-6" ng-value="post.id">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img class="imgperfil col-lg-2" src="../../static/images/icon_user1.png">
+                            <div class="col-lg-10">
+                                <strong class="panel-title"><a class="row" href="{% url 'red:url_miperfil' %}" ng-bind="post.autor.nombres +' '+ post.autor.apellidos"></a></strong>
+                                <span class="row" ng-bind="post.fecha_creacion"></span>
+                                <p class="paragraph" ng-bind="post.contenido"></p>
+                            </div>
+                      </div>
+                        <div class="panel-heading">
+                            <a href="" class="inline-group"><i class="material-icons ">favorite_border</i>ME GUSTA</a>
+                            <a href="" class="inline-group"><i class="material-icons ">share</i>COMPARTIR</a>
                         </div>
-                        <div class="box-footer" align="right">
-                            <button type="submit" class="btn btn-primary naveg" >Publicar</button>
+                        <div class="panel-footer">
+                            <input type="text" placeholder="Escribe tu comentario...">
+                            <div ng-repeat=" comentario in post.actividad[0].comentarios ">
+                                <p ng-bind="comentario.contenido"></p>
+                            </div>
                         </div>
                     </div>
-                  </div>
-              </div>
-          </div>
-    </div>
-<div>
-
-     <div class="box box-primary sombra1" ng-controller="CPost">
-        <div class="box-body">
-            {% csrf_token %}
-            <div class="post" style="margin-bottom: 20px;" ng-repeat="post in posts">
-              <div class="user-block">
-                 <h3 class="colorlet" align="center" style="font-size: 15px">{{ post.autor.nombres }}</h3>
-                <center><img class="img-responsive" src="../../static/images/pcapple.png" style="height: 180px" alt="user image"></center>
-                  <p>{{ post.contenido }}</p>
-              </div>
-              <p data-bind="text: content">
-              </p>
-              <ul class="list-inline">
-                <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
-              </ul>
-              <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario" style="float:left">
-             <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
-            <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
-            <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+                </div>
             </div>
-
         </div>
+        <div class="col-lg-2"></div>
     </div>
-</div>
-</div>
 </div>
 {% endblock container %}

@@ -48,3 +48,16 @@ img{
 .bot{
 	text-decoration-color: #009688;
 }
+
+.circular{
+	border-radius: 50%;
+	width: 80px;
+	height: 55px;
+	display: inline-block;
+}
+.imgperfil{
+	border-radius: 30%;
+	width: 60px;
+	height: 30px;
+	display: inline-block;
+}
