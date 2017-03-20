@@ -3,21 +3,12 @@
 {% block title %}
 Mis Canales
 {% endblock title%}
-{% block extrastatic %}
-    <style>
-        .circular{
-                border-radius: 50%;
-                width: 75px;
-                height: 75px;
-                display: inline-block;
-            }
-    </style>
-{% endblock extrastatic %}
+
 {% block container %}
     <div class="container" ng-controller="CMisCanales">
     <div class="sig-nav">
         <div class="panel panel-default">
-            <div class="panel-body center-block"><h4>Mis</h4></div>
+            <div class="panel-body center-block"><h4>Mis Canales</h4></div>
         </div>
         <div ng-repeat="canal in canales">
             <div class="col-lg-4 ">
@@ -28,6 +19,9 @@ Mis Canales
                     <div class="panel-body">
                         <img class="circular col-lg-4" src="../../static/images/icon_user1.png">
                         <p class="col-ls-8" ng-bind="canal.descripcion"></p>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{% url 'red:url_miperfil' %}" ng-bind="canal.autor.nombres"></a>
                     </div>
                 </div>
             </div>
