@@ -96,7 +96,7 @@ class ActividadSerializer(ModelSerializer):
         ordering = 'tipo'
 
 class PostSerializer(ModelSerializer):
-    autor = UsuarioSerializer(many=False)
+    autor = UsuarioSerializer(many=False, read_only=True)
     actividad = ActividadSerializer(many=True, read_only=True)
     class Meta:
         model = Post
@@ -110,5 +110,5 @@ class CanalSerializer(ModelSerializer):
 
     class Meta:
         model = Canal
-        fields = ('nombre', 'descripcion', 'fecha_creacion', 'autor', 'areas', 'posts')
+        fields = ('id', 'nombre', 'descripcion', 'fecha_creacion', 'autor', 'areas', 'posts')
 

@@ -1,39 +1,13 @@
 {% extends 'Base/base.html' %}
-
+{% block title %}
+    Publicaciones
+{% endblock title %}
 {% block container %}
 <div class="container">
-              <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
-                  </div>
-
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                    <ul class="nav navbar-nav">
-                      <li><a href="#"><span class="sr-only">(current)</span></a></li>
-                      <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
-                    </ul>
-
-
-                    <form class="navbar-form navbar-right" role="search">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Buscar">
-                      </div>
-
-                      <button type="submit" class="btn btn-primary naveg">
-                       <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
-                     </button>
-                         <button type="" class="btn btn-primary naveg"><a style="color:white;" href="{% url 'red:index' %}">cerrar sesion</a>
-                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </nav>
       <div class="sig-nav">
           <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 25%; height: 350px; float:left; margin-left: 25px">
                  <div class="panel-body">
-                     <center><img src="../../static/images/usuario11.jpg" align="center" class="img-circle sombra2" style="height: 150px"></center>
+                     <img src="../../static/images/usuario11.jpg" align="center" class="img-circle sombra2" style="height: 150px">
                      <div class="btn btn-default" style="margin: 10%"><a href="{% url 'red:url_miperfil' %}"> Francisco Alvarado</a></div>
                 </div>
               <div style="margin-left: 20%" class="btn btn-primary"><a style="color: white" href="{%url 'red:url_crearcanal'%}">Crear Canal</a></div>
@@ -48,7 +22,7 @@
                             <textarea rows="4" class="form-control input-sm" placeholder="Escribe tu publicación" data-bind="value: new_post" ></textarea>
                         </div>
                         <div class="box-footer" align="right">
-                            <button type="submit" class="btn btn-primary naveg" data-bind="click: saveNewPost" >Publicar!</button>
+                            <button type="submit" class="btn btn-primary naveg" >Publicar</button>
                         </div>
                     </div>
                   </div>
@@ -57,62 +31,28 @@
     </div>
 <div>
 
- <div class="box box-primary sombra1">
-					<div class="box-body">
-						<div class="post" style="margin-bottom: 20px;">
-						  <div class="user-block">
-                             <legend class="colorlet" align="center" style="font-size: 15px">Manuel Ramos</legend>
-						    <center><img class="img-responsive" src="../../static/images/pcapple.png" style="height: 180px" alt="user image"></center>
-						    <span class='username'>
-						      <a href="#" ><span data-bind="text: owner.name"></span></a>
-						      <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
-						      	<i class='fa fa-times'></i>
-						      </a>
-						    </span>
-						    <span class='description'>Publicación<span data-bind="text: created_relative"></span></span>
-						  </div>
-						  <p data-bind="text: content">
-						  </p>
-						  <ul class="list-inline">
-						    <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
-						  </ul>
-						  <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario" style="float:left">
-						 <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
-                        <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
-                        <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
-                        </div>
+     <div class="box box-primary sombra1" ng-controller="CPost">
+        <div class="box-body">
+            {% csrf_token %}
+            <div class="post" style="margin-bottom: 20px;" ng-repeat="post in posts">
+              <div class="user-block">
+                 <h3 class="colorlet" align="center" style="font-size: 15px">{{ post.autor.nombres }}</h3>
+                <center><img class="img-responsive" src="../../static/images/pcapple.png" style="height: 180px" alt="user image"></center>
+                  <p>{{ post.contenido }}</p>
+              </div>
+              <p data-bind="text: content">
+              </p>
+              <ul class="list-inline">
+                <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
+              </ul>
+              <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario" style="float:left">
+             <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
+            <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
+            <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
+            </div>
 
-					</div>
-				</div>
-
-    <div class="box box-primary sombra1">
-      <div class="box-body">
-        <div class="post" style="margin-top: 2%">
-          <div class="user-block">
-              <legend class="colorlet" align="center" style="font-size: 15px">Martha Medina</legend>
-            <center><img class="img-responsive" src="../../static/images/paisaje.jpg" style="height: 200px;" alt="user image"></center>
-            <span class='username'>
-              <a href="#" ><span data-bind="text: owner.name"></span></a>
-              <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
-                <i class='fa fa-times'></i>
-              </a>
-            </span>
-            <span class='description'><span data-bind="text: created_relative"></span></span>
-          </div>
-          <p data-bind="text: content">
-          </p>
-          <ul class="list-inline">
-            <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
-          </ul>
-          <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario">
-           <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
-          <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
-          <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
         </div>
-      </div>
     </div>
-
-</div>
 </div>
 </div>
 </div>

@@ -301,7 +301,7 @@ class NivelFormacionDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 def canales(request):
-    return render(request, 'redtem/canal.html')
+    return render(request, 'redtem/mis_canales.html')
 
 def administrador(request):
     return render(request, 'redtem/panel_admin1.html')
