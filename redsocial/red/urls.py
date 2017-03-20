@@ -4,7 +4,7 @@ from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, Actividad
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
     NivelFormacionDetail, administrador, index, panel2, canales, panel3, panel4, canal, crearcanal, buscar, perfil, miperfil, timeline, \
-    olvide, timeline_privado
+    olvide, timeline_privado, config
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()), # Create-Read, Todos los usuarios
@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^panel_admin4/$', panel4, name='panelAd4'),
     url(r'^mis_canales/$', canales, name='canales_user'),
     url(r'^timeline_privado/$', timeline_privado, name='timeline_privado'),
+    url(r'^config/$', config, name='config'),
 
 ]
 
