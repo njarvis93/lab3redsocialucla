@@ -340,4 +340,7 @@ def buscar(request):
     return render(request, 'redtem/buscar.html')
 
 def timeline_privado(request):
-    return  render(request, 'redtem/private_timeline.html')
+    return render(request, 'redtem/private_timeline.html')
+
+def config(request):
+    return render(request, 'redtem/config.html')

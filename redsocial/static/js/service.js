@@ -19,3 +19,11 @@ app.factory("CanalResource", ['$resource',function($resource) {
         }
     });
 }]);
+app.factory("ConfigResource", ['$resource', function($resource) {
+    return $resource("http://localhost:8000/red/api_users/:id", {id: "@id"},{
+        query: {
+            method: "GET",
+            isArray: true,
+        }
+    });
+}]);

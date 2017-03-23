@@ -1,0 +1,16 @@
+{% extends 'Base/base.html' %}
+
+{% block container %}
+<div class="container" ng-controller="Bichito">
+    <div class="sig-nav" ng-repeat="post in usuarios">
+        <div class="well">
+            <div class="panel-primary" ng-bind="post.nombres">
+
+            </div>
+            <div class="panel-primary" ng-bind="post.username">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock container %}
