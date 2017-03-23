@@ -38,4 +38,7 @@ app.config(function($routeProvider) {
             controller: "CMisCanales",
             templateUrl: "/templates/redtem/mis_canales.html"
         })
+        .when("/config", {
+            controller: "CConfiguracion"
+        })
 });
