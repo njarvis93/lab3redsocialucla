@@ -29,9 +29,9 @@ app.controller("CComentariosPorPost", ['$scope', 'ComentariosPorPostResource', f
     });
 
 }]);
-app.controller("CConfiguracion",['$scope', 'ConfigResource', function($scope, ConfigResource) {
+app.controller("Bichito",['$scope', 'ConfigResource', function($scope, ConfigResource) {
     $scope.usuarios = ConfigResource.query();
     $scope.usuarios.$promise.then(function(data) {
         console.log(JSON.stringify(data));
     })
-}])
+}]);

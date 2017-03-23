@@ -39,6 +39,6 @@ app.config(function($routeProvider) {
             templateUrl: "/templates/redtem/mis_canales.html"
         })
         .when("/config", {
-            controller: "CConfiguracion"
+            controller: "Bichito"
         })
 });
