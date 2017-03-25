@@ -3,19 +3,23 @@
 {% block title %}
     Canal
 {% endblock title %}
+
 {% block container %}
-<div class="container">
+<div class="container" ng-controller="CMisCanales">
 
     <div class="sig-nav">
+
         <div class="panel panel-default sombra1" style="background-color: #ffffff; width: 28%; height: 350px; float:left; margin-left: 10px">
             <div class="panel-body">
                 <center><img src="../../static/images/apps.png" style="width: 200px" align="center" class="img-circle sombra2"></center>
               </div>
         </div>
             <div class="panel panel-default post sombra1" style="float: right">
-                <h1 align="center">Aplicaciones Web</h1>
-                <p style="text-align: justify">Ingenieros en Informática egresados de la UCLA dedicados a la creación de aplicaciones web para celulares inteligentes, mediante el uso de tecnologías de software del lado del servidor y del cliente que involucran una combinación de procesos de base de datos con el uso de un navegador web a fin de realizar determinadas tareas o mostrar información.</p>
+                <strong ng-bind="id_canal"></strong>
+                <h1 align="center">{$ canales[0].nombre $}</h1>
+                <p style="text-align: justify">{$ canales[0].descripcion $}</p>
             </div>
+
             <div >
                 <ul class="nav nav-pills navbar-right">
                   <li  class="active"><a href="#publi" data-toggle="tab" aria-expanded="true">Publicaciones</a></li>

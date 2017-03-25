@@ -8,6 +8,7 @@ from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimient
 from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, \
     PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer
 from django.shortcuts import render
+
 from django.core.urlresolvers import reverse_lazy, reverse
 
 
