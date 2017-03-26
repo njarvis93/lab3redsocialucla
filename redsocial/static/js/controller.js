@@ -11,6 +11,7 @@ app.controller("CPost", ['$scope', 'PostResource', function($scope, PostResource
 }]);
 app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'AreasResource', function($scope, CanalResource, $window, Canal, AreasResource) {
     $scope.canals = Canal.query();
+    $scope.nombre_boton = "Crear";
     //$scope.canales = CanalResource.query();
     $scope.canals.$promise.then(function(data) {
         console.log(JSON.stringify(data));
@@ -34,16 +35,21 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
     $scope.new_canal = new Canal({fecha_creacion: fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate(), autor: 'user1', areas: areas_cono});
 
     $scope.Guardar = function() {
-
-        $scope.new_canal.$save(function() {
-            $scope.canals.push(new_canal);
-        }).then(function() {
-            $scope.new_canal = new Canal();
-        }).then(function() {
-            $scope.errors=null
-        }, function(rejection) {
-                $scope.errors = rejection.data;
-        })
+        if(!$scope.new_canal.id) {
+            $scope.new_canal.$save(function () {
+                $scope.canals.push(new_canal);
+            }).then(function () {
+                $scope.new_canal = new Canal();
+                $('#modal_canal').modal('hide');
+                $scope.Reset();
+            }).catch(function (errors) {
+                $scope.errors = null
+                console.log(errors);
+            });
+        }else{
+            alert("El id ya existe!");
+            $scope.new_canal.$update();
+        }
     };
     $scope.remove = function(canal) {
         canal.$remove(function() {
@@ -51,10 +57,23 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
             $scope.canals.splice(idx, 1);
         }).then(function() {
             alert("Eliminacion satisfactoria");
+            $scope.Reset();
         }).catch(function(errors) {
             console.log("Fallo por: "+errors);
         })
     };
+
+    $scope.showModal = function(new_canal) {
+        $scope.new_canal = new_canal;
+        $scope.nombre_boton = "Actualizar";
+        $('#modal_canal').modal('show');
+        
+    }
+
+    $scope.Reset=function() {
+        $scope.nombre_boton = "Crear";
+        $scope.new_canal = new  Canal();
+    }
 
 }]);
 app.controller("CCanal", ['$scope', '$location','CanalResource',function($scope, $location, CanalResource) {
