@@ -347,4 +347,4 @@ def config(request):
     return render(request, 'redtem/config.html')
 
 class CanalCRUDngView(NgCRUDView):
-    model= Canal
+    model = Canal

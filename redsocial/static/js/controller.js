@@ -27,17 +27,31 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
 
     var fecha_hoy = new Date();
     $scope.misareas = {
-        model: null,
+        model: [-1],
         opciones: AreasResource.query(),
         opcionSeleccionada:[-1]
     };
-    var areas_cono = $scope.misareas.model;
-    $scope.new_canal = new Canal({fecha_creacion: fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate(), autor: 'user1', areas: areas_cono});
+    var areas_cono = {
+        areaconocimiento_id: $scope.misareas.model
+    }
 
-    $scope.Guardar = function() {
-        if(!$scope.new_canal.id) {
-            $scope.new_canal.$save(function () {
-                $scope.canals.push(new_canal);
+    //$scope.new_canal = new Canal();
+    $scope.Guardar = function(new_canal, selectedareas) {
+        //$scope.new_canal = new Canal({fecha_creacion: fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate(), autor: 'user1', areas: areas_cono});
+        if(!new_canal.pk){
+            var nuevo_canal = new Canal();
+            nuevo_canal.id = new_canal.id;
+            nuevo_canal.nombre = new_canal.nombre;
+            nuevo_canal.descripcion = new_canal.descripcion;
+            nuevo_canal.fecha_creacion = fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate();
+            nuevo_canal.autor = 'user1';
+            nuevo_canal.areas = [];
+            console.log(selectedareas);
+            for (var i=0; i<selectedareas.length; i++){
+                nuevo_canal.areas[i] = parseInt(selectedareas[i]);
+            }
+            nuevo_canal.$save(function () {
+                $scope.canals.push(nuevo_canal);
             }).then(function () {
                 $scope.new_canal = new Canal();
                 $('#modal_canal').modal('hide');
@@ -48,7 +62,7 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
             });
         }else{
             alert("El id ya existe!");
-            $scope.new_canal.$update();
+            new_canal.$update();
         }
     };
     $scope.remove = function(canal) {
