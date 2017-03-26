@@ -10,20 +10,20 @@ app.controller("CPost", ['$scope', 'PostResource', function($scope, PostResource
     console.log($scope.posts);
 }]);
 app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'AreasResource', function($scope, CanalResource, $window, Canal, AreasResource) {
-
-    $scope.canales = CanalResource.query();
-    $scope.canales.$promise.then(function(data) {
-        //console.log(JSON.stringify(data));
+    $scope.canals = Canal.query();
+    //$scope.canales = CanalResource.query();
+    $scope.canals.$promise.then(function(data) {
+        console.log(JSON.stringify(data));
     });
     $scope.id_can="";
     $scope.Redireccionar = function(dato){
         console.log(dato);
-        $scope.canale = $scope.canales[dato-1];
+        $scope.canale = $scope.canals[dato-1];
         console.log($scope.canale);
         $window.location.href = "http://localhost:8000/red/canalprincipal?canal="+dato; 
         $scope.id_can = dato;
     };
-    $scope.canals = Canal.query();
+
     var fecha_hoy = new Date();
     $scope.misareas = {
         model: null,
@@ -38,12 +38,21 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
         $scope.new_canal.$save(function() {
             $scope.canals.push(new_canal);
         }).then(function() {
-            $scope.CMisCanales();
             $scope.new_canal = new Canal();
         }).then(function() {
             $scope.errors=null
         }, function(rejection) {
                 $scope.errors = rejection.data;
+        })
+    };
+    $scope.remove = function(canal) {
+        canal.$remove(function() {
+            var idx = $scope.canals.indexOf(canal);
+            $scope.canals.splice(idx, 1);
+        }).then(function() {
+            alert("Eliminacion satisfactoria");
+        }).catch(function(errors) {
+            console.log("Fallo por: "+errors);
         })
     };
 
