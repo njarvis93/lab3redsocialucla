@@ -1,31 +1,16 @@
 {% extends 'Base/base.html' %}
 
 {% block title %}
-Mis Canales
+    Mis Canales
 {% endblock title%}
 
-{% block extrajs %}
-    <script>
-        $('#btnModal').on("click", function(event) {
-            event.preventDefault();
-
-            var $contenedorModal = $('#modal_canal');
-            var urlModal         = $(this).attr("href");
-            var idModal          = $(this).data("idmodal");
-
-            $contenedorModal.load(urlModal + ' ' + idModal , function(response) {
-            $(this).modal({backdrop: "static"});
-            });
-        });
-    </script>
-{% endblock extrajs %}
 {% block container %}
     <div class="container" ng-controller="CMisCanales">
     <div class="sig-nav">
         <div class="panel panel-default">
             <div class="panel-body center-block">
                 <h4 class="col-lg-11">Mis Canales</h4>
-                <a class="col-lg-1 center-block btn btn-link" id="bntModal" href="#" data-idmodal="#modal_canal"><i class="material-icons">add_circle_outline</i></a>
+                <button type="button" class="col-lg-1 center-block btn btn-link" data-toggle="modal" data-target="#modal_canal"><i class="material-icons">add_circle_outline</i></button>
             </div>
         </div>
         <div ng-repeat="canal in canales">
@@ -45,23 +30,32 @@ Mis Canales
             </div>
         </div>
     </div>
+            <!-- Modal para agregar un canal -->
+            <div class="modal fade" id="modal_canal" role="form">
+                <div class="modal-dialog modal-sm">
+                    <form class="modal-content" method="post">{% csrf_token %}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Crear un nuevo canal</h4>
+                        </div>
+                        <div class="modal-body form-group">
+                            <label class="text-primary">Titulo:</label>
+                            <input  name="titulo" type="text" ng-model="new_canal.nombre" class="form-control" id="inputName" placeholder="Titulo de tu nuevo canal...">
+                            <label class="text-primary">Descripcion:</label>
+                            <textarea name="descripcion" class="form-control" ng-model="new_canal.descripcion" rows="2" id="textArea" placeholder="Agrega una descripcion de tu canal..."></textarea>
+                            <label class="text-primary">Areas de Conocimiento:</label>
+                            <select size="4" multiple class="form-control" ng-model="misareas.model" ng-options="opcion.nombre for opcion in misareas.opciones track by opcion.id">
+                            </select>
+                            <hr>
+                            <p ng-repeat="(name, errs) in errors" class="alert alert-dismissible alert-danger"><strong>{$ name $}</strong>: {$ errs $}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
+                            <button type="submit" ng-click="Guardar()" class="btn btn-primary">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
     </div>
-    <!-- Modal para agregar un canal -->
-    <div class="modal" id="modal_canal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Modal title</h4>
-          </div>
-          <div class="modal-body">
-            <p>One fine body…</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
 {% endblock container %}

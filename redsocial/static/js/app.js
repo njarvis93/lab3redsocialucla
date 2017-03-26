@@ -1,8 +1,8 @@
 /**
  * Created by Narvis Gil on 19/03/2017.
  */
-var app = angular.module("RedSocialUCLA", ["ngRoute", "ngResource"]);
-app.config(function($routeProvider, $locationProvider, $interpolateProvider) {
+var app = angular.module("RedSocialUCLA", ["ngRoute", "ngResource", "ngCookies"]);
+app.config(function($routeProvider, $locationProvider, $interpolateProvider, $httpProvider) {
     $routeProvider
         .when("/",{
             controller: "CLogin"
@@ -43,5 +43,14 @@ app.config(function($routeProvider, $locationProvider, $interpolateProvider) {
     });
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = 'csrf_token|escapejs }}'
+    }
+);
 
+app.run(
+    function($http, $cookies) {
+        $http.defaults.headers.post['X-CSRFToken'] = '{{ $cookies.csrftoken }}';
+        // Add the following two lines
+        $http.defaults.xsrfCookieName = 'csrftoken';
+        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
