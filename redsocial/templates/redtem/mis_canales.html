@@ -10,7 +10,7 @@
         <div class="panel panel-default">
             <div class="panel-body center-block">
                 <h4 class="col-lg-11">Mis Canales</h4>
-                <button type="button" class="col-lg-1 center-block btn btn-link" data-toggle="modal" data-target="#modal_canal"><i class="material-icons">add_circle_outline</i></button>
+                <button type="button" class="col-lg-1 center-block btn btn-link" ng-click="Reset()" data-toggle="modal" data-target="#modal_canal"><i class="material-icons">add_circle_outline</i></button>
             </div>
         </div>
         <div ng-repeat="canal in canals">
@@ -25,7 +25,9 @@
                                 <div class="btn-group pull-right">
                                     <a href="#" class="col-lg-2 dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">keyboard_arrow_down</i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="" ng-click="remove(canal)">Eliminar</a></li>
+                                        <li><a href="" ng-click="showModal(canal)">Editar</a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="text-danger" href="" ng-click="remove(canal)">Eliminar</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -48,7 +50,7 @@
                     <form class="modal-content" method="post" ng-submit="Guardar()">{% csrf_token %}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Crear un nuevo canal</h4>
+                            <h4 id="lblNewCanal" class="modal-title">Crear un nuevo canal</h4>
                         </div>
                         <div class="modal-body form-group">
                             <label class="text-primary">Titulo:</label>
@@ -63,7 +65,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
-                            <button type="submit" class="btn btn-primary">Crear</button>
+                            <button name="botonGuardar" id="botonGuardar" type="submit" class="btn btn-primary">{$ nombre_boton $}</button>
                         </div>
                     </form>
                 </div>
