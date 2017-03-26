@@ -4,7 +4,7 @@ from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, Actividad
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
     NivelFormacionDetail, administrador, index, panel2, canales, panel3, panel4, canal, crearcanal, buscar, perfil, miperfil, timeline, \
-    olvide, timeline_privado, config
+    olvide, timeline_privado, config, CanalCRUDngView
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()), # Create-Read, Todos los usuarios
@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^mis_canales/$', canales, name='canales_user'),
     url(r'^timeline_privado/$', timeline_privado, name='timeline_privado'),
     url(r'^config/$', config, name='config'),
+
+    ############# URLS para los CRUD ##############
+    url(r'^mis_canales/crud/canal/?$', CanalCRUDngView.as_view(), name="crud_canal"),
 
 ]
 

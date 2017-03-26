@@ -27,3 +27,15 @@ app.factory("ConfigResource", ['$resource', function($resource) {
         }
     });
 }]);
+app.factory("AreasResource", ['$resource', function($resource) {
+    return $resource("http://localhost:8000/red/areas_conocimiento/all",{id: "@id"}, {
+        query:{
+            method: "GET",
+            isArray: true
+        }
+    });
+}]);
+
+app.factory('Canal', ['$resource',function($resource) {
+    return $resource('crud/canal/', { 'id': '@id'},{});
+}]);
