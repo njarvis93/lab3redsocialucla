@@ -24,6 +24,7 @@ from django.contrib.auth.views import login
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^red/', include('red.urls', namespace='red')),
+    url(r'^', include('seguridad.urls', namespace='seguridad')),
     #url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),
     #url(r'^$',login, include('red.urls', namespace='red'))
 

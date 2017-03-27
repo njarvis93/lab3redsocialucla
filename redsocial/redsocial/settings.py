@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'red',
+    'seguridad',
     'rest_framework',
     'djng',
 ]
@@ -145,3 +146,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+LOGIN_URL = '/'
