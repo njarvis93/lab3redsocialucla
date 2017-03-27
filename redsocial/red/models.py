@@ -98,10 +98,10 @@ class Interes(models.Model):
 class Canal(models.Model):
     nombre = models.TextField(max_length=20)
     descripcion = models.TextField(max_length=100)
-    fecha_creacion = models.DateTimeField()
-    autor = models.ForeignKey(Usuario, related_name='creador', on_delete=models.CASCADE, unique=True)
+    fecha_creacion = models.DateField();
+    autor = models.ForeignKey(Usuario, related_name='creador', on_delete=models.CASCADE, unique=False)
     areas = models.ManyToManyField(AreaConocimiento, related_name='areas')
-    miembros = models.ManyToManyField(Perfil)
+    miembros = models.ManyToManyField(Perfil, blank=True)
 
 class Post(models.Model):
     tipo = models.IntegerField()

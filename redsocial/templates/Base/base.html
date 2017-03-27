@@ -30,8 +30,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
 	<script src="https://code.angularjs.org/1.4.0-beta.5/angular-route.min.js"></script>
 	<script src="https://code.angularjs.org/1.4.0-beta.5/angular-resource.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/controller.js' %}"></script>
     <script src="{% static 'js/service.js' %}"></script>
@@ -39,7 +44,8 @@
    <!-- <script src="{% static 'js/lumx.js' %}"></script-->
     <!--<script src="static 'js/jquery-1.10.2.min.js'"></script>-->
 
-
+    {% block base %}
+    {% endblock base %}
     {% block css %}
     {% endblock css %}
 
@@ -66,7 +72,7 @@
                             <input type="text" class="form-control" placeholder="Buscar">
                         </div>
                         <a style="color: white" class=" glyphicon glyphicon-search" href="{% url 'red:url_buscar' %}"></a>
-                        <button type="" class="btn btn-primary"><a style="color:white;" href="{% url 'red:index' %}">SALIR</a></button>
+                        <a class="btn btn-link" href="{% url 'red:index' %}">SALIR</a>
                     </form>
                 </div>
             </div>

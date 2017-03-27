@@ -8,6 +8,7 @@ from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimient
 from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, \
     PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer
 from django.shortcuts import render
+from djng.views.crud import NgCRUDView
 from django.core.urlresolvers import reverse_lazy, reverse
 
 
@@ -344,3 +345,6 @@ def timeline_privado(request):
 
 def config(request):
     return render(request, 'redtem/config.html')
+
+class CanalCRUDngView(NgCRUDView):
+    model = Canal

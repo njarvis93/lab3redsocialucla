@@ -1,13 +1,14 @@
 /**
  * Created by Narvis Gil on 19/03/2017.
  */
-var app = angular.module("RedSocialUCLA", ["ngRoute", "ngResource"]);
-app.config(function($routeProvider) {
+var app = angular.module("RedSocialUCLA", ["ngRoute", "ngResource", "ngCookies"]);
+app.config(function($routeProvider, $locationProvider, $interpolateProvider, $httpProvider) {
     $routeProvider
         .when("/",{
             controller: "CLogin"
         })
-        .when("/canalprincial",{
+        .when("/canalprincipal/canal=:dato",{
+            templateUrl: "/templates/redtem/canal.html",
             controller: "CCanal"
         })
         .when("/crearcanal",{
@@ -26,11 +27,6 @@ app.config(function($routeProvider) {
         .when("/timeline_privado",{
             controller: "CPostPrivado"
         })
-        .when("/canalprincipal/:id",{
-            controller: "CCanal",
-            templateUrl: "/templates/redtem/canal.html"
-
-        })
         .when("/administrador",{
             controller: "CAdministrador"
         })
@@ -40,5 +36,21 @@ app.config(function($routeProvider) {
         })
         .when("/config", {
             controller: "Bichito"
-        })
+        });
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = 'csrf_token|escapejs }}'
+    }
+);
+
+app.run(
+    function($http, $cookies) {
+        $http.defaults.headers.post['X-CSRFToken'] = '{{ $cookies.csrftoken }}';
+        // Add the following two lines
+        $http.defaults.xsrfCookieName = 'csrftoken';
+        $http.defaults.xsrfHeaderName = 'X-CSRFToken';
 });

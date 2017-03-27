@@ -8,7 +8,7 @@ class AreaConocimientoSerializer(ModelSerializer):
 
     class Meta:
         model = AreaConocimiento
-        fields = ('nombre', 'descripcion')
+        fields = ('id', 'nombre', 'descripcion')
 
 class ExperienciaLaboralSerializer(ModelSerializer):
 
