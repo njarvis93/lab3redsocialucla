@@ -2,30 +2,22 @@
  * Created by Narvis Gil on 19/03/2017.
  */
 var app = angular.module("RedSocialUCLA");
-app.controller("CPost", ['$scope', 'PostResource', function($scope, PostResource) {
+app.controller("CPost", ['$scope', 'PostResource', 'Post', function($scope, PostResource, Post) {
     $scope.posts = PostResource.query();
     $scope.posts.$promise.then(function(data) {
         //console.log(JSON.stringify(data));
     });
-      $scope.tipospost = {
-        model: null,
-        availableOptions: [
-          {id: '1', name: 'Publico'},
-          {id: '2', name: 'Privado'}
-        ]
-    };
-    console.log($scope.posts);
-    $scope.showModal = function(post) {
-        $scope.new_post = post;
-        $('#modal_post').modal('show');
-        console.log($scope.new_post);
-    }
-}]);
-app.controller("PostCRUDController", ['$scope', 'Post', function($scope, Post) {
     var fecha_hoy = new Date();
     console.log(fecha_hoy.getHours()+":"+fecha_hoy.getMinutes()+":"+fecha_hoy.getMinutes());
     $scope.allposts = Post.query();
-
+    $scope.tipospost = {
+        model: null,
+        availableOptions: [
+            {id: '1', name: 'Publico'},
+            {id: '2', name: 'Privado'}
+        ]
+    };
+    console.log($scope.posts);
     $scope.Guardar = function(new_post){
         if(!new_post.pk){
             var nuevo_post = new Post();
@@ -37,7 +29,7 @@ app.controller("PostCRUDController", ['$scope', 'Post', function($scope, Post) {
             nuevo_post.autor = 'user1';
             nuevo_post.$save(function() {
                 $scope.allposts.push(nuevo_post);
-            }).success(function () {
+            }).then(function () {
                 console.log("Post agregado");
                 $scope.new_post = new Post();
             }).catch(function (errors) {
@@ -47,8 +39,32 @@ app.controller("PostCRUDController", ['$scope', 'Post', function($scope, Post) {
         }else{
             alert("El id ya existe!");
             new_post.$update();
+            $scope.new_post.descripcion = " ";
+            $('#modal_post').modal('hide');
         }
     };
+    $scope.remove = function(new_post) {
+        if(confirm("¿Desea eliminar esta publicación y todo su contenido?")) {
+            new_post.$remove(function () {
+                var idx = $scope.allposts.indexOf(new_post);
+                $scope.allposts.splice(idx, 1);
+            }).then(function () {
+                alert("Eliminacion satisfactoria");
+            }).catch(function (errors) {
+                console.log("Fallo por: " + errors);
+            })
+        }
+    };
+    $scope.showModal = function(post) {
+        $scope.new_post = post;
+        $('#modal_post').modal('show');
+        console.log($scope.new_post);
+    }
+}]);
+app.controller("PostCRUDController", ['$scope', 'Post', function($scope, Post) {
+
+
+
 }]);
 app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'AreasResource', function($scope, CanalResource, $window, Canal, AreasResource) {
     $scope.canals = Canal.query();

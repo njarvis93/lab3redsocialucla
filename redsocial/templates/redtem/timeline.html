@@ -12,17 +12,20 @@
             <div class="well well-sm">
                 <a href="#" class="text-primary">SEGUIDORES</a>
             </div>
+            <div class="well well-sm">
+                <a href="#" class="text-primary">PRIVADO</a>
+            </div>
             <strong>CREAR</strong>
             <br>
             <a href="{% url 'red:url_crearcanal' %}">Nuevo Canal</a>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <div class="row">
-                <div class="panel panel-default" ng-controller="PostCRUDController">
+                <div class="panel panel-default">
                     <form method="post" ng-submit="Guardar(new_post)">{% csrf_token %}
                         <div class="form-group panel-body">
-                            <img class="col-lg-3 circular" src="../../static/images/icon_user1.png">
-                            <textarea ng-model="new_post.contenido" class="form-control col-lg-9" placeholder="¿Qué quieres contarnos?" rows="3"></textarea>
+                            <img class="col-lg-2 circular" src="../../static/images/icon_user1.png">
+                            <textarea ng-model="new_post.contenido" class="form-control col-lg-7" placeholder="¿Qué quieres contarnos?" rows="3"></textarea>
                         </div>
                         <div class="form-group panel-footer">
                             <button type="submit" class="btn btn-primary btn--m bottom-right">Publicar</button>
@@ -30,30 +33,34 @@
                     </form>
                 </div>
             </div>
-            <div ng-repeat="post in posts | orderBy: 'fecha_creacion': true">
+            <div ng-repeat="post in allposts | orderBy: 'fecha_creacion': true">
                 <div class="col-lg-6" ng-value="post.id">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <img class="imgperfil col-lg-2" src="../../static/images/icon_user1.png">
-                            <div class="col-lg-8">
-                                <strong class="panel-title"><a class="row" href="{% url 'red:url_miperfil' %}" ng-bind="post.autor.nombres +' '+ post.autor.apellidos"></a></strong>
-                                <span class="row" ng-bind="post.fecha_creacion"></span>
-                                <p class="paragraph" ng-bind="post.contenido"></p>
+                            <img class="imgperfil col-lg-1" src="../../static/images/icon_user1.png">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <strong class="panel-title"><a class="row" href="{% url 'red:url_miperfil' %}">{$ post.autor $}</a></strong>
+                                    <p class="row text-muted" ><small>{$ post.fecha_creacion $}</small></p>
+                                </div>
+                                <div class="btn-group col-lg-2">
+                                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">keyboard_arrow_down</i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="" ng-click="showModal(post)">Editar Publicación...</a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="text-danger" href="" ng-click="remove(post)">Eliminar</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="btn-group col-lg-2">
-                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">keyboard_arrow_down</i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="showModal(post)">Editar Publicación...</a></li>
-                                    <li class="divider"></li>
-                                    <li><a class="text-danger" href="">Eliminar</a></li>
-                                </ul>
+                            <div class="row">
+                                <p class="lead col-xs-10">{$ post.contenido $}</p>
                             </div>
                       </div>
                         <div class="panel-heading">
-                            <a href="" class="inline-group"><i class="material-icons">favorite_border</i>ME GUSTA</a>
+                            <a href="" class="inline-group "><i class="material-icons">favorite</i>ME GUSTA</a>
                             <a href="" class="inline-group"><i class="material-icons">share</i>COMPARTIR</a>
                         </div>
-                        <hr>
+                        <span class="divider"></span>
                         <div class="panel-footer">
                             <div ng-repeat=" comentario in post.actividad[0].comentarios ">
                                 <p ng-bind="comentario.contenido"></p>
@@ -64,32 +71,34 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
     </div>
         <!-- Modal para editar el post -->
             <div class="modal fade" id="modal_post" role="form">
                 <div class="modal-dialog modal-sm">
                     <form class="modal-content" method="post" ng-submit="Guardar(new_post)">{% csrf_token %}
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 id="lblNewPost" class="modal-title">Editar publicación</h4>
-                        </div>
-                        <div class="modal-body form-group">
-                            <label class="text-primary">Tipo: </label>
-                            <select ng-model="tipospost.model">
-                                <option ng-repeat="option in tipospost.availableOptions" value="{$ option.id $}">{$ option.name $}</option>
-                            </select>
-                            <br>
-                            <label class="text-primary">Contenido:</label>
-                            <textarea name="descripcion" class="form-control" ng-model="new_post.contenido" rows="3" id="textArea"></textarea>
+                        <fieldset>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <legend id="lblNewPost" class="modal-title">Editar publicación</legend>
+                            </div>
+                            <div class="modal-body form-group">
+                                <label class="text-primary">Tipo: </label>
+                                <select ng-model="tipospost.model">
+                                    <option ng-repeat="option in tipospost.availableOptions" value="{$ option.id $}">{$ option.name $}</option>
+                                </select>
+                                <br>
+                                <label class="text-primary">Contenido:</label>
+                                <textarea name="descripcion" class="form-control" ng-model="new_post.contenido" rows="3" id="textArea"></textarea>
 
-                            <hr>
-                            <pre>{$ tipospost.model $}</pre>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
-                            <button name="botonGuardar" id="botonGuardar" type="submit" class="btn btn-primary">Actualizar</button>
-                        </div>
+                                <hr>
+                                <pre>{$ tipospost.model $}</pre>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
+                                <button name="botonGuardar" id="botonGuardar" type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>

@@ -5,8 +5,12 @@ var app = angular.module("RedSocialUCLA");
 app.factory("LoginResource", function($resource) {
     return $resource("http://localhost:8000/red/api_users/:pk",{pk: "@pk"}, {update: {method: "PUT"}});
 });
-app.factory("PostResource", function($resource) {
-    return $resource("http://localhost:8000/red/all_post/:id", {id: "@id"}, {update: { method: "PUT"} });
+app.factory("PostResource", function($resource, $http) {
+        return $resource("http://localhost:8000/red/all_post/:id", {id: "@id"}, {
+            update: { method: "PUT" },
+            remove: { method: "DELETE" }
+        });
+
 });
 app.factory("CanalResource", ['$resource',function($resource) {
     return $resource("http://localhost:8000/red/canales/:id", {id: "@id"}, {
@@ -64,7 +68,9 @@ app.factory('Canal', ['$resource',function($resource) {
     });
 }]);
 app.factory('Post', ['$resource', function($resource) {
-    return $resource('crud/post/:pk', {pk: '@pk'}, {
-        update: { method: "POST", params: { pk: '@pk'}}
+    return $resource('crud/post/:id', {pk: '@pk'}, {
+        update: { method: "POST", params: { pk: '@pk'}},
+        remove: { method: "DELETE", params: { pk: '@pk' }},
+        get: { method: "GET", params:{pk: '@pk' }}
     });
 }]);
