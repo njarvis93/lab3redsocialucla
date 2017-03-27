@@ -1,0 +1,17 @@
+tengo sueñooo
+no se io
+{% extends 'Base/base.html' %}
+
+{% block container %}
+<div class="container" ng-controller="listpost">
+
+    <div class="sig-nav" ng-repeat="post in post">
+        <div class="well">
+
+            <div class="panel-primary" ng-bind="post.contenido">
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock container %}

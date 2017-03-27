@@ -1,0 +1,32 @@
+{% extends 'Base/base.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="panel panel-default post sombra1" style="padding-left: 50px; width: 50%">
+            <div class="col-xs-10">
+
+                <form action="" class="form-vertical">
+                    <div class="form-group">
+                        <TR>
+                        <TD>
+                        <INPUT type=text class="form-control" name="first_name" placeholder="Nombre(s):">
+                        </TD>
+                        <TD>
+                        <INPUT type=text class="form-control" name="last_name" placeholder="Apellido(s):"></li>
+                        </TD>
+                            <TD>
+                        <INPUT type=text class="form-control" name="username" placeholder="Nombre de Usuario:"></li>
+                        </TD>
+                        <TD>
+                        <INPUT type="email" class="form-control" name="email" placeholder="E-mail:"></li>
+                        </TD>
+                        <TD>
+                        <INPUT type=password class="form-control" name="password" placeholder="Contraseña:"></li>
+                        </TD>
+                        </TR>
+                    </div>
+                    <div class="form-group">
+    <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                    </form>
+{% endblock %}

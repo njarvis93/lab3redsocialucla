@@ -21,6 +21,9 @@ app.factory("CanalResource", ['$resource',function($resource) {
 }]);
 app.factory("ConfigResource", ['$resource', function($resource) {
     return $resource("http://localhost:8000/red/api_users/:id", {id: "@id"},{
+        update:{
+            method: "POST"
+        },
         query: {
             method: "GET",
             isArray: true
@@ -29,6 +32,24 @@ app.factory("ConfigResource", ['$resource', function($resource) {
 }]);
 app.factory("AreasResource", ['$resource', function($resource) {
     return $resource("http://localhost:8000/red/areas_conocimiento/all",{id: "@id"}, {
+        query:{
+            method: "GET",
+            isArray: true
+        }
+    });
+}]);
+
+app.factory("SeguidResource", ['$resource', function($resource) {
+    return $resource("http://localhost:8000/red/seguidor/all",{id: "@id"}, {
+        query:{
+            method: "GET",
+            isArray: true
+        }
+    });
+}]);
+
+app.factory("listapostResource", ['$resource', function($resource) {
+    return $resource("http://localhost:8000/red/all_post/",{id: "@id"}, {
         query:{
             method: "GET",
             isArray: true
