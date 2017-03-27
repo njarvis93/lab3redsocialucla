@@ -38,6 +38,6 @@ app.factory("AreasResource", ['$resource', function($resource) {
 
 app.factory('Canal', ['$resource',function($resource) {
     return $resource('crud/canal/:id', { pk: '@pk'},{
-        update: { method: "PUT", params:{ pk: "@pk" }}
+        update: { method: "POST", params:{ pk: "@pk" }}
     });
 }]);
