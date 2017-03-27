@@ -103,18 +103,56 @@ app.controller("CComentariosPorPost", ['$scope', 'ComentariosPorPostResource', f
     });
 
 }]);
-app.controller("Bichito",['$scope', 'ConfigResource', function($scope, ConfigResource) {
+app.controller("Bichito",['$scope', 'ConfigResource', function($scope, ConfigResource, $resource) {
     nEditar = {};
+   $scope.posts = [];
+   $scope.newPost = {};
     $scope.usuarios = ConfigResource.query();
     $scope.usuarios.$promise.then(function(data) {
         console.log(JSON.stringify(data));
+       $scope.posts = data;
     })
+    $scope.posts = Post.query();
+   /* $scope.addPost = function () {
+        $scope.post("http://127.0.0.1:8000/red/api_users",{
+            nombres: $scope.newPost.nombres,
+            username: $scope.newPost.username,
+            email: $scope.newPost.email,
+            password: $scope.newPost.password,
+            telefono_movil: $scope.newPost.telefono_movil
+        })
+            .success(function (data,status,headers, config) {
+                $scope.posts.push($scope.newPost);
+                $scope.addPost = {};
+            })
+            .error(function (error, status, headers, config) {
+                console.log(error)
+
+            })
+
+    }
+        
+*/
 
 
 }]);
 app.controller("AreasConocimiento", ['$scope', 'AreasResource', function($scope, AreasResource) {
     $scope.areas = AreasResource.query();
     $scope.areas.$promise.then(function(data) {
+        console.log(JSON.stringify(data));
+    });
+}]);
+
+app.controller("Seguido",['$scope', 'SeguidResource', function($scope, SeguidResource) {
+ $scope.seguidor = SeguidResource.query();
+    $scope.seguidor.$promise.then(function(data) {
+        console.log(JSON.stringify(data));
+    });
+}]);
+
+app.controller("listpost",['$scope', 'listapostResource', function($scope, listapostResource) {
+ $scope.lpost = listapostResource.query();
+    $scope.lpost.$promise.then(function(data) {
         console.log(JSON.stringify(data));
     });
 }]);
