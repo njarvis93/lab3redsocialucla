@@ -7,7 +7,7 @@ app.config(function($routeProvider, $locationProvider, $interpolateProvider, $ht
         .when("/",{
             controller: "CLogin"
         })
-        .when("/canalprincipal/canal=:dato",{
+        .when("/canalprincipal/:pk",{
             templateUrl: "/templates/redtem/canal.html",
             controller: "CCanal"
         })

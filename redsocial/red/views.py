@@ -357,6 +357,9 @@ def config(request):
 class CanalCRUDngView(NgCRUDView):
     model = Canal
 
+class PostCRUDView(NgCRUDView):
+    model = Post
+
 def seguidor(request):
     return render(request, 'redtem/seguidores.html')
 

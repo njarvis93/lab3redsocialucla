@@ -7,7 +7,48 @@ app.controller("CPost", ['$scope', 'PostResource', function($scope, PostResource
     $scope.posts.$promise.then(function(data) {
         //console.log(JSON.stringify(data));
     });
+      $scope.tipospost = {
+        model: null,
+        availableOptions: [
+          {id: '1', name: 'Publico'},
+          {id: '2', name: 'Privado'}
+        ]
+    };
     console.log($scope.posts);
+    $scope.showModal = function(post) {
+        $scope.new_post = post;
+        $('#modal_post').modal('show');
+        console.log($scope.new_post);
+    }
+}]);
+app.controller("PostCRUDController", ['$scope', 'Post', function($scope, Post) {
+    var fecha_hoy = new Date();
+    console.log(fecha_hoy.getHours()+":"+fecha_hoy.getMinutes()+":"+fecha_hoy.getMinutes());
+    $scope.allposts = Post.query();
+
+    $scope.Guardar = function(new_post){
+        if(!new_post.pk){
+            var nuevo_post = new Post();
+            nuevo_post.id = new_post.id;
+            nuevo_post.tipo = 1;
+            nuevo_post.contenido = new_post.contenido;
+            nuevo_post.fecha_creacion = fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate();
+            nuevo_post.hora_creacion = fecha_hoy.getHours()+":"+fecha_hoy.getMinutes()+":"+fecha_hoy.getMinutes();
+            nuevo_post.autor = 'user1';
+            nuevo_post.$save(function() {
+                $scope.allposts.push(nuevo_post);
+            }).success(function () {
+                console.log("Post agregado");
+                $scope.new_post = new Post();
+            }).catch(function (errors) {
+                $scope.errors = null
+                console.log(errors);
+            });
+        }else{
+            alert("El id ya existe!");
+            new_post.$update();
+        }
+    };
 }]);
 app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'AreasResource', function($scope, CanalResource, $window, Canal, AreasResource) {
     $scope.canals = Canal.query();
@@ -21,7 +62,7 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
         console.log(dato);
         $scope.canale = $scope.canals[dato-1];
         console.log($scope.canale);
-        $window.location.href = "http://localhost:8000/red/canalprincipal?canal="+dato; 
+        $window.location.href = "http://localhost:8000/red/canalprincipal?canal="+dato;
         $scope.id_can = dato;
     };
 
@@ -34,7 +75,7 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
     var areas_cono = {
         areaconocimiento_id: $scope.misareas.model
     }
-
+    
     //$scope.new_canal = new Canal();
     $scope.Guardar = function(new_canal, selectedareas) {
         //$scope.new_canal = new Canal({fecha_creacion: fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate(), autor: 'user1', areas: areas_cono});
@@ -90,11 +131,12 @@ app.controller("CMisCanales", ['$scope', 'CanalResource', '$window', 'Canal', 'A
     }
 
 }]);
-app.controller("CCanal", ['$scope', '$location','CanalResource',function($scope, $location, CanalResource) {
-    var id_canal = $location.search().canal;
-    console.log(id_canal);
-    $scope.micanal = $scope.canales[id_canal];
+app.controller("CCanal", ['$scope', '$routeParams', '$location','Canal',function($scope, $routeParams, $location, Canal) {
+    $scope.allcanals = Canal.get();
+    $scope.micanal = $scope.allcanals[$scope.id_can];
+    console.log($scope.id_can);
     console.log($scope.micanal);
+    console.log($scope.allcanals);
 }]);
 app.controller("CComentariosPorPost", ['$scope', 'ComentariosPorPostResource', function($scope, $routeParams, ComentariosPorPostResource) {
     $scope.comentarios = ComentariosPorPostResource.query();

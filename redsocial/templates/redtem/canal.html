@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block container %}
-<div class="container" ng-controller="CMisCanales">
+<div class="container" ng-controller="CCanal">
 
     <div class="sig-nav">
 
@@ -16,8 +16,8 @@
         </div>
             <div class="panel panel-default post sombra1" style="float: right">
                 <strong ng-bind="id_canal"></strong>
-                <h1 align="center">{$ canales[0].nombre $}</h1>
-                <p style="text-align: justify">{$ canales[0].descripcion $}</p>
+                <h1 align="center">{$ micanal.nombre $}</h1>
+                <p style="text-align: justify">{$ micanal.descripcion $}</p>
             </div>
 
             <div >
