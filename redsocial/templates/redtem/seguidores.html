@@ -1,0 +1,16 @@
+holisssssssss
+{% extends 'Base/base.html' %}
+
+{% block container %}
+<div class="container" ng-controller="Seguido">
+
+    <div class="sig-nav" ng-repeat="post in seguidor">
+        <div class="well">
+
+            <div class="panel-primary" ng-bind="post.id_usuario_id">
+            <button ng-Click="Submit">Amigo</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock container %}
