@@ -1,0 +1,24 @@
+{% extends 'Base/base.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="panel panel-default post sombra1" style="padding-left: 50px; width: 50%">
+            <div class="col-xs-10">
+
+                <form action="" class="form-vertical">
+                    <div class="form-group">
+                        <TR>
+                            <TD>
+                        <INPUT type=text class="form-control" name="username" placeholder="Nombre de Usuario:"></li>
+                        </TD>
+                        <TD>
+                        <INPUT type=password class="form-control" name="password" placeholder="Contraseña:"></li>
+                        </TD>
+                        </TR>
+                    </div>
+                    <div class="form-group">
+                        <a href="#">olvide mi contraseña</a>
+    <input class="btn btn-primary" type="submit" value="ingresar">
+                    </div>
+                    </form>
+{% endblock %}

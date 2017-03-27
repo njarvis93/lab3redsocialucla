@@ -18,10 +18,13 @@ from django.contrib import admin
 
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.views import login
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^red/', include('red.urls', namespace='red')),
+    #url(r'^usuarios/', include('usuarios.urls', namespace='usuarios')),
+    #url(r'^$',login, include('red.urls', namespace='red'))
 
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

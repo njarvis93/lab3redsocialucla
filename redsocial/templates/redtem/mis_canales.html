@@ -58,7 +58,7 @@
                             <label class="text-primary">Descripcion:</label>
                             <textarea name="descripcion" class="form-control" ng-model="new_canal.descripcion" rows="2" id="textArea" placeholder="Agrega una descripcion de tu canal..."></textarea>
                             <label class="text-primary">Areas de Conocimiento:</label>
-                            <select size="4" multiple class="form-control" ng-model="misareas.areas">
+                            <select size="4" multiple class="form-control" ng-model="misareas.model">
                                 <option ng-repeat="opcion in misareas.opciones track by opcion.id" ng-value="opcion.id" >{$ opcion.nombre $}</option>
                             </select>
                             <hr>

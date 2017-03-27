@@ -9,7 +9,6 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-
 # Create your models here.
 
 def user_directory_path_audio(instance, filename):

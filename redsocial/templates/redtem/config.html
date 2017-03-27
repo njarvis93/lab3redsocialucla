@@ -2,14 +2,42 @@
 
 {% block container %}
 <div class="container" ng-controller="Bichito">
+
     <div class="sig-nav" ng-repeat="post in usuarios">
         <div class="well">
+            <label>Nombre:</label>
+            <input type="text" ng-model="newPost.nombres">
+            <button ng-Click="Submit">Editar</button>
             <div class="panel-primary" ng-bind="post.nombres">
-
             </div>
+
+            <br>
+            <label>Nombre de Usuario:</label>
+            <input type="text" ng-model="newPost.username">
+            <button ng-Click="Submit">Editar</button>
             <div class="panel-primary" ng-bind="post.username">
-
             </div>
+            <br>
+            <label>Correo de Contacto:</label>
+            <input type="text" ng-model="newPost.email">
+            <button ng-Click="Submit">Editar</button>
+            <div class="panel-primary" ng-bind="post.email">
+            </div>
+            <br>
+            <label>Contraseña:</label>
+            <input type="text" ng-model="newPost.password">
+            <button ng-Click="Submit">Editar</button>
+            <div class="panel-primary" ng-bind="post.password">
+            </div>
+            <br>
+            <label>Telefono Registrado:</label>
+            <input type="text" ng-model="newPost.telefono_movil">
+            <button ng-Click="Submit">Editar</button>
+            <div class="panel-primary" ng-bind="post.telefono_movil">
+            </div>
+        <div class="card__img card__img--left" style="height: 160px;">
+<img src="static/images/icon_user1.png">
+        </div>
         </div>
     </div>
 </div>
