@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.contrib.auth.decorators import login_required
 from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, ActividadesList, PostDetail, PostList,\
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
@@ -30,20 +31,20 @@ urlpatterns = [
     url(r'^formacion/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionList.as_view()),
     url(r'^formacion/(?P<pk>[0-9]+)/user/(?P<id_autor>[a-z0-9]+)/$', NivelFormacionDetail.as_view()), ##Hasta aqui las API
     url(r'^$', index, name='index'), ##Login
-    url(r'^canalprincipal/$', canal, name='url_canalprincipal'), ##Canal
-    url(r'^crearcanal/$', crearcanal, name='url_crearcanal'), ##Crear un canal
-    url(r'^miperfil/$', miperfil, name='url_miperfil'), ##Mi perfil
-    url(r'^perfil/$', perfil, name='url_perfil'), ##Perfil externo, ajeno al usuario logueado
-    url(r'^timeline/$', timeline, name='url_timeline'), ## Muro
+    url(r'^canalprincipal/$', login_required(canal), name='url_canalprincipal'), ##Canal
+    url(r'^crearcanal/$', login_required(crearcanal), name='url_crearcanal'), ##Crear un canal
+    url(r'^miperfil/$', login_required(miperfil), name='url_miperfil'), ##Mi perfil
+    url(r'^perfil/$', login_required(perfil), name='url_perfil'), ##Perfil externo, ajeno al usuario logueado
+    url(r'^timeline/$', login_required(timeline), name='url_timeline'), ## Muro
     url(r'^olvidemicontrasena/$', olvide, name='url_olvide'), ## Olvide mi contraseña
     url(r'^buscar/$', buscar, name='url_buscar'), ##Buscar
-    url(r'^administrador/$', administrador, name='administrador'), ##Perfil del administrador de la red
-    url(r'^panel_admin2/$', panel2, name='panelAd2'),
-    url(r'^panel_admin3/$', panel3, name='panelAd3'),
-    url(r'^panel_admin4/$', panel4, name='panelAd4'),
-    url(r'^mis_canales/$', canales, name='canales_user'),
-    url(r'^timeline_privado/$', timeline_privado, name='timeline_privado'),
-    url(r'^config/$', config, name='config'),
+    url(r'^administrador/$', login_required(administrador), name='administrador'), ##Perfil del administrador de la red
+    url(r'^panel_admin2/$', login_required(panel2), name='panelAd2'),
+    url(r'^panel_admin3/$', login_required(panel3), name='panelAd3'),
+    url(r'^panel_admin4/$', login_required(panel4), name='panelAd4'),
+    url(r'^mis_canales/$', login_required(canales), name='canales_user'),
+    url(r'^timeline_privado/$', login_required(timeline_privado), name='timeline_privado'),
+    url(r'^config/$', login_required(config), name='config'),
     url(r'^seguidor/all', SeguidorList.as_view()),
     url(r'^seguidor/$', seguidor, name='seguidor'),
     url(r'^listapost/$', listapost, name='listapost'),
