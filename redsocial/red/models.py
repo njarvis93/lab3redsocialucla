@@ -9,23 +9,22 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-
 # Create your models here.
 
 def user_directory_path_audio(instance, filename):
-    return 'user_{0}/audio/%Y/%m/%d/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/audio/%Y/%m/%d/{1}'.format(instance.autor.username, filename)
 
 
 def user_directory_path_images(instance, filename):
-    return 'user_{0}/images/%Y/%m/%d/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/images/%Y/%m/%d/{1}'.format(instance.autor.username, filename)
 
 
 def user_directory_path_videos(instance, filename):
-    return 'user_{0}/videos/%Y/%m/%d/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/videos/%Y/%m/%d/{1}'.format(instance.autor.username, filename)
 
 
 def user_directory_profile_picture(instance, filename):
-    return 'user_{0}/profile_pic/%Y/%m/%d/{1}'.format(instance.user.id, filename)
+    return 'user_{0}/profile_pic/%Y/%m/%d/{1}'.format(instance.autor.username, filename)
 
 
 class Permiso(models.Model):
@@ -98,18 +97,18 @@ class Interes(models.Model):
 class Canal(models.Model):
     nombre = models.TextField(max_length=20)
     descripcion = models.TextField(max_length=100)
-    fecha_creacion = models.DateTimeField()
-    autor = models.ForeignKey(Usuario, related_name='creador', on_delete=models.CASCADE, unique=True)
+    fecha_creacion = models.DateField();
+    autor = models.ForeignKey(Usuario, related_name='creador', on_delete=models.CASCADE, unique=False)
     areas = models.ManyToManyField(AreaConocimiento, related_name='areas')
-    miembros = models.ManyToManyField(Perfil)
+    miembros = models.ManyToManyField(Perfil, blank=True)
 
 class Post(models.Model):
     tipo = models.IntegerField()
     autor = models.ForeignKey(Usuario, related_name='user')
     contenido = models.TextField()
-    imagenes = models.ImageField(upload_to=user_directory_path_images, blank=True)
-    audio = models.FileField(upload_to=user_directory_path_audio, blank=True)
-    video = models.FileField(upload_to=user_directory_path_videos, blank=True)
+    imagenes = models.ImageField(upload_to=user_directory_path_images, blank=True, null=True)
+    audio = models.FileField(upload_to=user_directory_path_audio, blank=True, null=True)
+    video = models.FileField(upload_to=user_directory_path_videos, blank=True, null=True)
     fecha_creacion = models.DateField()
     hora_creacion = models.TimeField()
     id_canal = models.ManyToManyField(Canal, related_name='posts', blank=True)

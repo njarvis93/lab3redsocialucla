@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Usuario, AreaConocimiento, Canal, Actividad, Comentario, Compartir, Post, Likes, ExperienciaLaboral, \
-    Perfil, Interes, Idioma, NivelFormacion
+    Perfil, Interes, Idioma, NivelFormacion, Seguidor
 
 
 
@@ -8,7 +8,12 @@ class AreaConocimientoSerializer(ModelSerializer):
 
     class Meta:
         model = AreaConocimiento
-        fields = ('nombre', 'descripcion')
+        fields = ('id', 'nombre', 'descripcion')
+
+class SeguidorSerializer(ModelSerializer):
+     class Meta:
+        model = Seguidor
+        fields = ('id', 'estatus', 'fecha_actividad', 'id_usuario_id')
 
 class ExperienciaLaboralSerializer(ModelSerializer):
 
@@ -96,7 +101,7 @@ class ActividadSerializer(ModelSerializer):
         ordering = 'tipo'
 
 class PostSerializer(ModelSerializer):
-    autor = UsuarioSerializer(many=False)
+    autor = UsuarioSerializer(many=False, read_only=True)
     actividad = ActividadSerializer(many=True, read_only=True)
     class Meta:
         model = Post
@@ -110,5 +115,5 @@ class CanalSerializer(ModelSerializer):
 
     class Meta:
         model = Canal
-        fields = ('nombre', 'descripcion', 'fecha_creacion', 'autor', 'areas', 'posts')
+        fields = ('id', 'nombre', 'descripcion', 'fecha_creacion', 'autor', 'areas', 'posts')
 

@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from django.http import Http404
-from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimiento, Perfil, Interes, Idioma, NivelFormacion, ExperienciaLaboral
+from .models import Usuario, Canal, Post, Actividad, Comentario, AreaConocimiento, Perfil, Interes, Idioma, NivelFormacion, ExperienciaLaboral, Seguidor
 from .serializers import UsuarioSerializer, AreaConocimientoSerializer, CanalSerializer, ActividadSerializer, ComentarioSerializer, PostSerializer, \
-    PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer
+    PerfilSerializer, ExperienciaLaboralSerializer, IdiomaSerializer, InteresesSerializer, NivelFormacionSerializer, SeguidorSerializer
 from django.shortcuts import render
+from djng.views.crud import NgCRUDView
 from django.core.urlresolvers import reverse_lazy, reverse
 
 
@@ -153,6 +154,14 @@ class AreaConocimientoList(generics.ListCreateAPIView):
 class AreaConocimientoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = AreaConocimiento.objects.all()
     serializer_class = AreaConocimientoSerializer
+
+class SeguidorDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Seguidor.objects.all()
+    serializer_class = SeguidorSerializer
+
+class SeguidorList(generics.ListCreateAPIView):
+    queryset = Seguidor.objects.all()
+    serializer_class = SeguidorSerializer
 
 class ExperienciaLaboralList(APIView):
 
@@ -301,7 +310,7 @@ class NivelFormacionDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 def canales(request):
-    return render(request, 'redtem/canal.html')
+    return render(request, 'redtem/mis_canales.html')
 
 def administrador(request):
     return render(request, 'redtem/panel_admin1.html')
@@ -340,4 +349,22 @@ def buscar(request):
     return render(request, 'redtem/buscar.html')
 
 def timeline_privado(request):
-    return  render(request, 'redtem/private_timeline.html')
+    return render(request, 'redtem/private_timeline.html')
+
+def config(request):
+    return render(request, 'redtem/config.html')
+
+class CanalCRUDngView(NgCRUDView):
+    model = Canal
+
+class PostCRUDView(NgCRUDView):
+    model = Post
+
+class PerfilCRUDView(NgCRUDView):
+    model = Perfil
+
+def seguidor(request):
+    return render(request, 'redtem/seguidores.html')
+
+def listapost(request):
+    return render(request, 'redtem/posts.html')

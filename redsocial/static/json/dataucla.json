@@ -1,0 +1,115 @@
+[
+  {
+    "pk":"1",
+    "ci": "A1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"2",
+    "ci": "B1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"3",
+    "ci": "C1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"4",
+    "ci": "D1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"5",
+    "ci": "E1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"6",
+    "ci": "F1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"7",
+    "ci": "G1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"8",
+    "ci": "H1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"9",
+    "ci": "I1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"10",
+    "ci": "J1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"11",
+    "ci": "K1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"12",
+    "ci": "L1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"13",
+    "ci": "M1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"14",
+    "ci": "N1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"15",
+    "ci": "O1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  },
+  {
+    "pk":"16",
+    "ci": "P1234567",
+    "nombre": "",
+    "apellido": "",
+    "fecha_nacimiento":""
+  }
+
+]
