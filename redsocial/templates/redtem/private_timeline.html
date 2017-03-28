@@ -8,142 +8,90 @@
     <script src="{% static 'js/index.js' %}"></script>
 {% endblock extra_js_head %}
 
+{% block title %}Muro Privado{% endblock title %}
+
 {% block container %}
-<div class="container">
-  <nav class="navbar navbar-inverse navbar-fixed-top naveg" role="navigation">
-      <div class="container-fluid">
-          <div class="navbar-header">
-              <a class="navbar-brand" href="{% url 'red:url_timeline' %}"><span class="glyphicon glyphicon-education" ></span> EXPERT.COM</a>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-              <ul class="nav navbar-nav">
-                  <li><a href="#"><span class="sr-only">(current)</span></a></li>
-                  <li><a href="{% url 'red:url_miperfil' %}">Mi Perfil</a></li>
-              </ul>
-              <form class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar">
-                  </div>
-                  <button type="submit" class="btn btn-primary naveg" href="{% url 'red:url_buscar' %}">
-                       <span class=" glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-                  <a type="" class="btn btn-primary naveg" href="{% url 'red:index' %}">Cerrar Sesión
-                       <span class=" glyphicon glyphicon-lock" aria-hidden="true"></span>
-                  </a>
-              </form>
-          </div>
-      </div>
-  </nav>
-
-        <div class="sig-nav">
-                 <div class="panel-body">
-                     <center><img src="../../static/images/perfil_01.jpg" align="left" class="img-circle"></center>
-                  
-      
-  
-          <div class="panel panel-default post" style="float: right; width: 70%;" >
-         <div class="col-x">
-                
+<div class="container" ng-controller="CPost">
+    <div class="sig-nav">
+        <div class="panel-body">
+            <div class="panel panel-default post col-lg-9" style="float: right; width: 70%;" >
+                <form method="post" ng-submit="Guardar(new_post)">{% csrf_token %}
                     <div class="form-group">
-                        <label for="contenido" class="control-label">Escribe tu publicacion</label>
-                        <textarea name="contenido" id="contenido" class="form-control"></textarea>
+                        <textarea name="contenido" id="contenido" class="form-control" ng-model="new_post.contenido" placeholder="Escribe para ti..."></textarea>
+                        <data ng-init="usuario='{{ request.user.username }}'"></data>
+                        <data ng-init="new_post.tipo= 2"></data>
                     </div>
                     <div class="form-group">
-                    <p style="float: right"><a class="btn btn-primary btn-lg naveg"><span class="glyphicon glyphicon-camera"></span></a></p>
-                      
-                        <p style="float: right"><a class="btn btn-primary btn-lg naveg"><span class="glyphicon glyphicon-user"></span></a></p>
-                        <p style="float: center"><a class="btn btn-primary btn-lg naveg" align="center">Publicar<span class="glyphicon glyphicon-world"></span></a></p>
+                        <div class="col-lg-9"><a class="btn btn-default btn-md "><i class="material-icons">photo_camera</i></a></div>
+                        <button class="btn btn-primary btn-m col-lg-3" align="center" type="submit">Publicar</button>
                     </div>
-
+                </form>
             </div>
-
+            <div class="col-lg-3" align="left">
+                <dl>
+                    <dt><h6 class="well well-sm"><a href="{% url 'red:canales_user' %}"><strong>CANALES</strong></a></h6></dt>
+                    <dt><h6 class="well well-sm"><a href="#"><strong>SEGUIDORES</strong></a></h6></dt>
+                    <dt><h6 class="well well-sm"><a href="#"><strong>SEGUIDOS</strong></a></h6></dt>
+                </dl>
+            </div>
         </div>
-        <div align="left">
-</br>
-</br>
-</br>
-</br>
-</br>                 <dl>
-                   <dt><h6><a href="{% url 'red:canales_user' %}">Canales</a></h6></dt>
-                   <dt><h6><a href="#">Seguidores</a></h6></dt>
-                   <dt><h6><a href="#">Seguidos</a></h6></dt>
+        <div class="panel panel-default" style="background-color: #ffffff; width: 104%; height: 630px; float:left; margin-left: 40px">
+            <div class="container">
+                <div class="page-header text-center">
+                    <h5 id="timeline">Mis Publicaciones personales</h5>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="hace 2 horas  via Twitter" id=""></i></a></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <img src="../../static/images/inicio.png"  class="img-center" align="center" />
+                                <div class="timeline-body">
+                                    <p>"El futuro del  comercio electronico" Las tendencias del comercio electronico cambian a una enorme velocidad. La aplicacion de los aplicacion de los avances tecnologicos y la adaptacion de un cliente en continua transformacion marcan las pautas de un buen negocio.</p>
+                                </div>
+                                <div class="timeline-footer">
+                                    <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                                    <a><i class="glyphicon glyphicon-share"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li  class="timeline-inverted">
+                        <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
+                        <div class="timeline-panel">
+<div class="panel-body">
 
-                 </dl>
-
-                  </div>
-          
-   </div>
-   <div class="panel panel-default" style="background-color: #ffffff; width: 104%; height: 630px; float:left; margin-left: 40px">
-   <div class="container">
-    <div class="page-header text-center">
-    <h5 id="timeline">Publicaciones Anteriores</h5>
-    </div>
-    <ul class="timeline">
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="hace 2 horas  via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img src="../../static/images/inicio.png"  class="img-center" align="center" />
-              
-            
-            <div class="timeline-body">
-              <p>"El futuro del  comercio electronico"
-              Las tendencias del comercio electronico cambian a una enorme velocidad. La aplicacion de los aplicacion de los avances tecnologicos y la adaptacion de un cliente en continua transformacion marcan las pautas de un buen negocio.</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                
-            </div>
-            </div>
-          </div>
-        </li>
-        
-        <li  class="timeline-inverted">
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="panel-body">
-              
-              </div>
-          
-          <div class="timeline-body">
-              <p>El último movimiento de Apple ha incrementado con fuerza los rumores en torno a la posibilidad de que el iPhone 8, que se prevé sea presentado en septiembre, incorpore finalmente el sistema de carga inalámbrica, como se viene rumoreando desde hace tiempo</p>
-              
-            </div>
-             <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right"></a>
-            </div>
-          </div>
-        </li>
-        
-      
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-      
-            <div class="timeline-body">
-              <p>Conferencia de Redes el 24/02 en el Decanato de Ciencias y Tecnologia a las 3pm</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right"></a>
-            </div>
-          </div>
-        </li>
-      
-        <li class="clearfix" style="float: none;"></li>
-    </ul>
 </div>
-</div><!-- fin del dev debajo del nav-->
 
-</div><!-- fin del general-->
+<div class="timeline-body">
+<p>El último movimiento de Apple ha incrementado con fuerza los rumores en torno a la posibilidad de que el iPhone 8, que se prevé sea presentado en septiembre, incorpore finalmente el sistema de carga inalámbrica, como se viene rumoreando desde hace tiempo</p>
+
+</div>
+<div class="timeline-footer">
+<a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+<a><i class="glyphicon glyphicon-share"></i></a>
+<a class="pull-right"></a>
+</div>
+</div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-body">
+                                <p>Conferencia de Redes el 24/02 en el Decanato de Ciencias y Tecnologia a las 3pm</p>
+                            </div>
+                            <div class="timeline-footer">
+                                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                                <a><i class="glyphicon glyphicon-share"></i></a>
+                                <a class="pull-right"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix" style="float: none;"></li>
+                </ul>
+            </div>
+        </div><!-- fin del dev debajo del nav-->
+    </div><!-- fin del general-->
 </div>
 <!---el nuevo-->
 

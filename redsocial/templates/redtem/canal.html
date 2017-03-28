@@ -29,7 +29,7 @@
                 </ul>
     <div id="myTabContent" class="tab-content">
       <!--Publicaciones-->
-  <div class="tab-pane fade active in" id="publi">
+  <div class="tab-pane fade active in" id="publi" ng-controller="CPost">
     <div class="panel panel-default post sombra1" style="margin-top: 5%">
       <div class="panel-body">
         <div class="box box-primary">
@@ -42,36 +42,45 @@
         </div>
       </div>
     </div>
-    <label style="margin-left: 32%; font-size: 20px">Publicaciones Recientes</label>
-
- <div class="box box-primary sombra1">
-     <div class="box-body">
-         <div class="post" style="margin-bottom: 20px;">
-             <div class="user-block">
-                 <legend class="colorlet" align="center" style="font-size: 15px">Manuel Ramos</legend>
-                 <center><img class="img-responsive" src="../../static/images/pcapple.png" style="height: 180px" alt="user image"></center>
-                 <span class='username'>
-                     <a href="#" ><span data-bind="text: owner.name"></span></a>
-                     <a href='#' class='pull-right btn-box-tool' data-bind="visible : can_delete, click : removePost" >
-                         <i class='fa fa-times'></i>
-                     </a>
-                 </span>
-                 <span class='description'>Publicación<span data-bind="text: created_relative"></span></span>
-             </div>
-             <p data-bind="text: content">
-             </p>
-             <ul class="list-inline">
-                 <li class="pull-right"><a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comentarios (<span data-bind="text: comments_count"></span>)</a></li>
-             </ul>
-             <input class="form-control input-sm" type="text" placeholder="Escribe tu comentario" style="float:left">
-             <div style="float: left"><a href="#">Me gusta</a> <span class="glyphicon glyphicon-thumbs-up"></span></div>
-             <div style="float: left"><a href="#">  Comentarios</a> <span class="glyphicon glyphicon-comment"></span></button>
-                 <div style="float: right"><a href="#">  Compartir</a> <span class="glyphicon glyphicon-share-alt"></span></div>
-             </div>
-         </div>
-     </div>
- </div>
-  </div>
+    <label style="margin-left: 32%; font-size: 20px" >Publicaciones Recientes</label>
+    <div ng-repeat="post in allposts | filter: { id_canal: misparams().canal } | orderBy: 'fecha_creacion': true">
+        <div class="col-lg-6" ng-value="post.id">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img class="imgperfil col-lg-1" src="../../static/images/icon_user1.png">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <strong class="panel-title"><a class="row" href="{% url 'red:url_miperfil' %}">{$ post.autor $}</a></strong>
+                            <p class="row text-muted" ><small>{$ post.fecha_creacion $}</small></p>
+                        </div>
+                        <div class="btn-group col-lg-2">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">keyboard_arrow_down</i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" ng-click="showModal(post)">Editar Publicación...</a></li>
+                                <li class="divider"></li>
+                                <li><a class="text-danger" href="" ng-click="remove(post)">Eliminar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="lead col-xs-10">{$ post.contenido $}</p>
+                    </div>
+              </div>
+                <div class="panel-heading">
+                    <a href="" class="inline-group "><i class="material-icons">favorite</i>ME GUSTA</a>
+                    <a href="" class="inline-group"><i class="material-icons">share</i>COMPARTIR</a>
+                </div>
+                <span class="divider"></span>
+                <div class="panel-footer">
+                    <div ng-repeat=" comentario in post.actividad[0].comentarios ">
+                        <p ng-bind="comentario.contenido"></p>
+                    </div>
+                    <input type="text" placeholder="Escribe tu comentario...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
   <!--Fotos-->
       <div class="tab-pane fade " id="fotos">
         <div class="panel panel-default post sombra1" style="margin-top: 5%">

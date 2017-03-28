@@ -3,8 +3,8 @@
     Publicaciones
 {% endblock title %}
 
-
 {% block container %}
+
     <div class="container" ng-controller="CPost">
     <div class="row sig-nav">
         <div class="col-lg-2">
@@ -15,7 +15,7 @@
                 <a href="#" class="text-primary">SEGUIDORES</a>
             </div>
             <div class="well well-sm">
-                <a href="#" class="text-primary">PRIVADO</a>
+                <a href="{% url 'red:timeline_privado' %}" class="text-primary">PRIVADO</a>
             </div>
             <strong>CREAR</strong>
             <br>
@@ -28,15 +28,17 @@
                     <form method="post" ng-submit="Guardar(new_post)">{% csrf_token %}
                         <div class="form-group panel-body">
                             <img class="col-lg-2 circular" src="../../static/images/icon_user1.png">
-                            <textarea ng-model="new_post.contenido" class="form-control col-lg-7" placeholder="¿Qué quieres contarnos?" rows="3"></textarea>
+                            <textarea ng-model="new_post.contenido" class="form-control col-lg-7" placeholder="¿Qué quieres contarle al mundo?" rows="3"></textarea>
                         </div>
                         <div class="form-group panel-footer">
                             <button type="submit" class="btn btn-primary btn--m bottom-right">Publicar</button>
+                            <data ng-init="usuario='{{ request.user.username }}'"></data>
+                            <data ng-init="new_post.tipo=1"></data>
                         </div>
                     </form>
                 </div>
             </div>
-            <div ng-repeat="post in allposts | orderBy: 'fecha_creacion': true">
+            <div ng-repeat="post in allposts |filter: { autor: usuario, tipo: 1} |orderBy: 'fecha_creacion': true">
                 <div class="col-lg-6" ng-value="post.id">
                     <div class="panel panel-default">
                         <div class="panel-body">
