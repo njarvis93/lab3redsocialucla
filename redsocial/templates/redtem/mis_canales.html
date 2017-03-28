@@ -13,7 +13,7 @@
                 <button type="button" class="col-lg-1 center-block btn btn-link" ng-click="Reset()" data-toggle="modal" data-target="#modal_canal"><i class="material-icons">add_circle_outline</i></button>
             </div>
         </div>
-        <div ng-repeat="canal in canals">
+        <div ng-repeat="canal in canals | filter: { miembros: usuario }">
             <div class="col-lg-4 ">
                 <div class="panel panel-primary">
                     <div class="panel-heading center-block collapse navbar-collapse">
@@ -48,6 +48,8 @@
             <div class="modal fade" id="modal_canal" role="form">
                 <div class="modal-dialog modal-sm">
                     <form class="modal-content" method="post" ng-submit="Guardar(new_canal, misareas.model)">{% csrf_token %}
+                        <data ng-init="usuario='{{ request.user.username }}'"></data>
+
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 id="lblNewCanal" class="modal-title">Crear un nuevo canal</h4>

@@ -360,6 +360,9 @@ class CanalCRUDngView(NgCRUDView):
 class PostCRUDView(NgCRUDView):
     model = Post
 
+class PerfilCRUDView(NgCRUDView):
+    model = Perfil
+
 def seguidor(request):
     return render(request, 'redtem/seguidores.html')
 
