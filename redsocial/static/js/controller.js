@@ -17,6 +17,10 @@ app.controller("CPost", ['$scope', 'PostResource', 'Post', function($scope, Post
             {id: '2', name: 'Privado'}
         ]
     };
+    $scope.id_canales = {
+        model: [],
+        opcionSeleccionada:[]
+    }
     console.log($scope.posts);
     $scope.Guardar = function(new_post){
         console.log("--"+new_post.autor+"--"+new_post.contenido+"---"+$scope.usuario);
@@ -28,6 +32,10 @@ app.controller("CPost", ['$scope', 'PostResource', 'Post', function($scope, Post
             nuevo_post.fecha_creacion = fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate();
             nuevo_post.hora_creacion = fecha_hoy.getHours()+":"+fecha_hoy.getMinutes()+":"+fecha_hoy.getMinutes();
             nuevo_post.autor = $scope.usuario;
+            nuevo_post.id_canal = []
+            if(new_post.aux_canal!== null) {
+                nuevo_post.id_canal[0] = new_post.aux_canal;
+            }
             nuevo_post.$save(function() {
                 $scope.allposts.push(nuevo_post);
             }).then(function () {
@@ -90,10 +98,7 @@ app.controller("CMisCanales", ['$scope', '$window', 'Canal', 'AreasResource', 'P
         opciones: AreasResource.query(),
         opcionSeleccionada:[-1]
     };
-    var areas_cono = {
-        areaconocimiento_id: $scope.misareas.model
-    }
-    
+
     //$scope.new_canal = new Canal();
     $scope.Guardar = function(new_canal, selectedareas) {
         //$scope.new_canal = new Canal({fecha_creacion: fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate(), autor: 'user1', areas: areas_cono});
@@ -150,7 +155,7 @@ app.controller("CMisCanales", ['$scope', '$window', 'Canal', 'AreasResource', 'P
 
 }]);
 app.controller("CCanal", ['$scope', '$routeParams', '$location','Canal',function($scope, $routeParams, $location, Canal) {
-    $scope.allcanals = Canal.query();
+
     $scope.misparams = function(){
         var url= location.search.replace("?", "");
         var arrUrl = url.split("&");
@@ -161,9 +166,9 @@ app.controller("CCanal", ['$scope', '$routeParams', '$location','Canal',function
         }
         return urlObj;
     };
+    console.log($routeParams.canal);
     console.log($scope.misparams().canal);
-    var idx = $scope.allcanals.indexOf($scope.misparams.canal);
-    console.log(idx);
+    $scope.allcanals = Canal.get({pk: $scope.misparams().canal });
 }]);
 app.controller("CComentariosPorPost", ['$scope', 'ComentariosPorPostResource', function($scope, $routeParams, ComentariosPorPostResource) {
     $scope.comentarios = ComentariosPorPostResource.query();

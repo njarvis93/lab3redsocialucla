@@ -62,9 +62,8 @@ app.factory("listapostResource", ['$resource', function($resource) {
 }]);
 
 app.factory('Canal', ['$resource',function($resource) {
-    return $resource('crud/canal/:id', { pk: '@pk'},{
-        update: { method: "POST", params:{ pk: "@pk" }},
-        get: { method: "GET", isArray: true }
+    return $resource('crud/canal/?pk=:pk', { pk: '@pk'},{
+        update: { method: "POST", params:{ pk: "@pk" }}
     });
 }]);
 app.factory('Post', ['$resource', function($resource) {
