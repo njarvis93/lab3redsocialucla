@@ -16,8 +16,8 @@
         </div>
             <div class="panel panel-default post sombra1" style="float: right">
                 <strong ng-bind="id_canal"></strong>
-                <h1 align="center">{$ micanal.nombre $}</h1>
-                <p style="text-align: justify">{$ micanal.descripcion $}</p>
+                <h1 align="center">{$ allcanals.nombre $}</h1>
+                <p style="text-align: justify">{$ allcanals.descripcion $}</p>
             </div>
 
             <div >
@@ -30,18 +30,23 @@
     <div id="myTabContent" class="tab-content">
       <!--Publicaciones-->
   <div class="tab-pane fade active in" id="publi" ng-controller="CPost">
-    <div class="panel panel-default post sombra1" style="margin-top: 5%">
-      <div class="panel-body">
-        <div class="box box-primary">
-          <div class="box-body">
-            <textarea rows="4" class="form-control input-sm" placeholder="Escribe tu publicación" data-bind="value: new_post" ></textarea>
-          </div>
-          <div class="box-footer" align="right">
-            <button type="submit" class="btn btn-primary naveg" data-bind="click: saveNewPost" >Publicar!</button>
+      <form method="post" ng-submit="Guardar(new_post)">{% csrf_token %}
+        <div class="panel panel-default post sombra1" style="margin-top: 5%">
+          <div class="panel-body">
+            <div class="box box-primary">
+              <div class="box-body">
+                <textarea rows="3" class="form-control input-sm" ng-model="new_post.contenido" placeholder="Escribe tu publicación"></textarea>
+              </div>
+              <div class="box-footer" align="right">
+                  <button type="submit" class="btn btn-primary naveg">Publicar!</button>
+                  <data ng-init="new_post.tipo=1"></data>
+                  <data ng-init="usuario='{{ request.user.username }}'"></data>
+                  <data ng-init="new_post.aux_canal = misparams().canal"></data>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </form>
     <label style="margin-left: 32%; font-size: 20px" >Publicaciones Recientes</label>
     <div ng-repeat="post in allposts | filter: { id_canal: misparams().canal } | orderBy: 'fecha_creacion': true">
         <div class="col-lg-6" ng-value="post.id">
