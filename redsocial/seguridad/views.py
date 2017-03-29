@@ -1,12 +1,19 @@
 from django.shortcuts import render
 # Importamos la vista genérica FormView
 from django.views.generic.edit import FormView
-from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 # Importamos el formulario de autenticación de django
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from .forms import FormularioLogin
+#--------------------------
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+
+from .forms import SignUpForm
 
 # Create your views here.
 class Login(FormView):
@@ -28,3 +35,27 @@ class Login(FormView):
     def form_valid(self, form):
         login(self.request, form.get_user())
         return super(Login, self).form_valid(form)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            email = form.cleaned_data["email"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            user = User.objects.create_user(username, email, password)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            return HttpResponseRedirect(reverse('Login'))
+    else:
+        form = SignUpForm()
+
+    data = {
+        'form': form,
+    }
+    return render_to_response("red:url_timeline", data, context_instance=RequestContext(request))

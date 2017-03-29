@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'egresados_redsocial',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -147,3 +147,5 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = '/'
+
+LOGIN_REDIRECT_URL ="/"
