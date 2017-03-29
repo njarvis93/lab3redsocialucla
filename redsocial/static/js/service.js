@@ -62,12 +62,12 @@ app.factory("listapostResource", ['$resource', function($resource) {
 }]);
 
 app.factory('Canal', ['$resource',function($resource) {
-    return $resource('crud/canal/?pk=:pk', { pk: '@pk'},{
+    return $resource('http://localhost:8000/red/crud/canal/', { pk: '@pk'},{
         update: { method: "POST", params:{ pk: "@pk" }}
     });
 }]);
 app.factory('Post', ['$resource', function($resource) {
-    return $resource('crud/post/:id', {pk: '@pk'}, {
+    return $resource('http://localhost:8000/red/crud/post/:id', {pk: '@pk'}, {
         update: { method: "POST", params: { pk: '@pk'}},
         remove: { method: "DELETE", params: { pk: '@pk' }},
         get: { method: "GET", params:{pk: '@pk' }}

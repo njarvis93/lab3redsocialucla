@@ -5,7 +5,8 @@ from .views import UsuarioList, UsuarioDetail, CanalDetail, CanalList, Actividad
     ActividadDetail, ComentariosList, AreaConocimientoList, AreaConocimientoDetail, ExperienciaLaboralDetail, ExperienciaLaboralList, \
     IdiomasList, IdiomasDetail, IdiomasPorUsuarioList, IdiomaPorUsuarioDetail, PerfilUserList, PerfilUserDetail, UserList, NivelFormacionList, \
     NivelFormacionDetail, administrador, index, panel2, canales, panel3, panel4, canal, crearcanal, buscar, perfil, miperfil, timeline, \
-    olvide, timeline_privado, config, CanalCRUDngView, SeguidorList, seguidor, listapost, PostCRUDView, PerfilCRUDView
+    olvide, timeline_privado, config, CanalCRUDngView, SeguidorList, seguidor, listapost, PostCRUDView, PerfilCRUDView, \
+    ComentariosCRUDView
 
 urlpatterns = [
     url(r'^api_users', UsuarioList.as_view()), # Create-Read, Todos los usuarios
@@ -51,12 +52,10 @@ urlpatterns = [
    # url(r'^registrar/$', config, name='registrar'),
 
     ############# URLS para los CRUD ##############
-    url(r'^mis_canales/crud/canal/?$', CanalCRUDngView.as_view(), name="crud_canal"),
-    url(r'^canalprincipal/crud/canal/?$', CanalCRUDngView.as_view(), name="crud_canal"),
-    url(r'^timeline/crud/post/?$', PostCRUDView.as_view(), name="crud_post"),
-    url(r'^timeline_privado/crud/post/?$', PostCRUDView.as_view(), name="crud_post"),
-    url(r'^canalprincipal/crud/post/?$', PostCRUDView.as_view(), name="crud_post"),
+    url(r'^crud/canal/?$', CanalCRUDngView.as_view(), name="crud_canal"),
+    url(r'^crud/post/?$', PostCRUDView.as_view(), name="crud_post"),
     url(r'^crud/perfil/?$', PerfilCRUDView.as_view(), name='crud_perfil'),
+    url(r'^crud/comentarios/?$', ComentariosCRUDView.as_view(), name='crud_comentario'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

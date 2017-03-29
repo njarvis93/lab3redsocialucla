@@ -51,6 +51,7 @@ class Idioma(models.Model):
 class Usuario(models.Model):
     username = models.CharField(max_length=15, primary_key=True, unique=True)
     password = models.TextField()
+    cedula = models.CharField(max_length=8)
     roles = models.ManyToManyField(Rol)
     email = models.EmailField(max_length=254, unique=True)
     nombres = models.CharField(max_length=254)
@@ -106,7 +107,7 @@ class Post(models.Model):
     tipo = models.IntegerField()
     autor = models.ForeignKey(Usuario, related_name='user')
     contenido = models.TextField()
-    imagenes = models.ImageField(upload_to=user_directory_path_images, blank=True, null=True)
+    imagenes = models.ImageField(upload_to='pictures', blank=True, null=True)
     audio = models.FileField(upload_to=user_directory_path_audio, blank=True, null=True)
     video = models.FileField(upload_to=user_directory_path_videos, blank=True, null=True)
     fecha_creacion = models.DateField()
@@ -129,7 +130,7 @@ class Comentario(models.Model):
     fecha_ocurrencia = models.DateField()
     id_comentario_padre = models.ForeignKey('self', related_name='respuestas', null=True)
     id_actividad = models.ForeignKey(Actividad, related_name='comentarios', on_delete=models.CASCADE)
-
+    post = models.ForeignKey(Post, related_name='publicacion', blank=True, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.autor+' Content: '+self.contenido
 

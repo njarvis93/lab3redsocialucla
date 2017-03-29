@@ -32,7 +32,8 @@ app.controller("CPost", ['$scope', 'PostResource', 'Post', function($scope, Post
             nuevo_post.fecha_creacion = fecha_hoy.getFullYear()+"-"+fecha_hoy.getMonth()+"-"+fecha_hoy.getDate();
             nuevo_post.hora_creacion = fecha_hoy.getHours()+":"+fecha_hoy.getMinutes()+":"+fecha_hoy.getMinutes();
             nuevo_post.autor = $scope.usuario;
-            nuevo_post.id_canal = []
+            nuevo_post.id_canal = [];
+            nuevo_post.imagenes = new_post.imagenes;
             if(new_post.aux_canal!== null) {
                 nuevo_post.id_canal[0] = new_post.aux_canal;
             }
