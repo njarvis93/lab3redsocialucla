@@ -362,6 +362,7 @@ class PostCRUDView(NgCRUDView):
 
 class PerfilCRUDView(NgCRUDView):
     model = Perfil
+
 class ComentariosCRUDView(NgCRUDView):
     model = Comentario
 

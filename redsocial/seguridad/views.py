@@ -58,4 +58,4 @@ def signup(request):
     data = {
         'form': form,
     }
-    return render_to_response("red:url_timeline", data, context_instance=RequestContext(request))
+    return render_to_response('redtem/signup.html', data, context_instance=RequestContext(request))
