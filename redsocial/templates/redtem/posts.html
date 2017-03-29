@@ -3,15 +3,41 @@ no se io
 {% extends 'Base/base.html' %}
 
 {% block container %}
-<div class="container" ng-controller="listpost">
+ {% if form.errors %}
+        <p>{{ form.errors }}</p>
+    {% endif %}
 
-    <div class="sig-nav" ng-repeat="post in post">
-        <div class="well">
+    <form method="post" action="">
 
-            <div class="panel-primary" ng-bind="post.contenido">
-            </div>
+        {% csrf_token %}
 
-        </div>
-    </div>
-</div>
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.email.label_tag }}</td>
+                <td>{{ form.email }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.first_name.label_tag }}</td>
+                <td>{{ form.first_name }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.last_name.label_tag }}</td>
+                <td>{{ form.last_name }}</td>
+            </tr>
+
+        </table>
+
+        <input type="submit" value="login"/>
+    </form>
 {% endblock container %}
