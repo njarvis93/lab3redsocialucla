@@ -354,6 +354,12 @@ def timeline_privado(request):
 def config(request):
     return render(request, 'redtem/config.html')
 
+def seguidor(request):
+    return render(request, 'redtem/seguidores.html')
+
+def listapost(request):
+    return render(request, 'redtem/posts.html')
+
 class CanalCRUDngView(NgCRUDView):
     model = Canal
 
@@ -366,8 +372,5 @@ class PerfilCRUDView(NgCRUDView):
 class ComentariosCRUDView(NgCRUDView):
     model = Comentario
 
-def seguidor(request):
-    return render(request, 'redtem/seguidores.html')
-
-def listapost(request):
-    return render(request, 'redtem/posts.html')
+class ActividadCRUDView(NgCRUDView):
+    model = Actividad

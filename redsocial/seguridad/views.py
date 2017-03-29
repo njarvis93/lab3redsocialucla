@@ -51,7 +51,7 @@ def signup(request):
             user.last_name = last_name
             user.save()
 
-            return HttpResponseRedirect(reverse('Login'))
+            return HttpResponseRedirect(reverse_lazy("seguridad:login"))
     else:
         form = SignUpForm()
 

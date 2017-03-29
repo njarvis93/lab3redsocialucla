@@ -51,7 +51,6 @@ class Idioma(models.Model):
 class Usuario(models.Model):
     username = models.CharField(max_length=15, primary_key=True, unique=True)
     password = models.TextField()
-    cedula = models.CharField(max_length=8)
     roles = models.ManyToManyField(Rol)
     email = models.EmailField(max_length=254, unique=True)
     nombres = models.CharField(max_length=254)
@@ -130,7 +129,7 @@ class Comentario(models.Model):
     fecha_ocurrencia = models.DateField()
     id_comentario_padre = models.ForeignKey('self', related_name='respuestas', null=True)
     id_actividad = models.ForeignKey(Actividad, related_name='comentarios', on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name='publicacion', blank=True, null=True, on_delete=models.CASCADE)
+    #post = models.ForeignKey(Post, related_name='publicacion', blank=True, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.autor+' Content: '+self.contenido
 
