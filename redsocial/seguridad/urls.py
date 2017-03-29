@@ -5,5 +5,5 @@ from django.contrib.auth.views import logout
 urlpatterns = [
    url(r'^$', Login.as_view(), name="login"),
    url(r'^salir$', logout, name="salir", kwargs={'next_page': '/'}),
-   url(r'^signup$', signup, {'template_name': 'redtem/signup.html'}, name='signup'),
+   url(r'^signup$', signup, name='signup'),
 ]

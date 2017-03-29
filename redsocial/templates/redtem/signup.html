@@ -1,11 +1,20 @@
 {% extends 'Base/base.html' %}
-{% block content %}
+{% block title %}
+    Registrarse - EXPERT.COM
+{% endblock title %}
+{% block extrajs %}
+    <script>
+        $(document).ready().getElementById('seccionnavbar').hide('true');
+    </script>
+{% endblock extrajs %}
+{% block container %}
 
     {% if form.errors %}
         <p>{{ form.errors }}</p>
     {% endif %}
-
-    <form method="POST" action="{% url 'signup' %}">
+    <div class="container">
+    <div class="row sig-nav">
+    <form method="POST" action="{% url 'seguridad:signup' %}">
 
         {% csrf_token %}
 
@@ -38,5 +47,7 @@
 
         <input type="submit" value="login"/>
     </form>
+    </div>
+    </div>
 
-{% endblock %}
+{% endblock container %}
